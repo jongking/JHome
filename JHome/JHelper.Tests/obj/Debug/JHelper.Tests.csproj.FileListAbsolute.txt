@@ -1,0 +1,17 @@
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\hibernate.cfg.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\JHelper.Tests.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\JHelper.Tests.pdb
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Iesi.Collections.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\JHelper.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\NHibernate.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\nunit.framework.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\JHelper.pdb
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Iesi.Collections.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\NHibernate.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\nunit.framework.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\obj\Debug\JHelper.Tests.csprojResolveAssemblyReference.cache
+H:\GitHub\JHome\JHome\JHelper.Tests\obj\Debug\JHelper.Tests.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\obj\Debug\JHelper.Tests.pdb
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Domain.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Domain.pdb
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Mappings\people.hbm.xml

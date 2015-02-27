@@ -1,0 +1,7 @@
+H:\GitHub\JHome\JHome\Tx\bin\Debug\Tx.dll
+H:\GitHub\JHome\JHome\Tx\bin\Debug\Tx.pdb
+H:\GitHub\JHome\JHome\Tx\bin\Debug\nunit.framework.dll
+H:\GitHub\JHome\JHome\Tx\bin\Debug\nunit.framework.xml
+H:\GitHub\JHome\JHome\Tx\obj\Debug\Tx.csprojResolveAssemblyReference.cache
+H:\GitHub\JHome\JHome\Tx\obj\Debug\Tx.dll
+H:\GitHub\JHome\JHome\Tx\obj\Debug\Tx.pdb
