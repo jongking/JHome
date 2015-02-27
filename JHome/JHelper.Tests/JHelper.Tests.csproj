@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenerateSchema_Fixture.cs" />
-    <Compile Include="ProductRepository_Fixture.cs" />
+    <Compile Include="Domain\GenerateSchema_Fixture.cs" />
+    <Compile Include="Domain\ProductRepository_Fixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +64,9 @@
       <Project>{79c77b98-d95c-4c69-b594-aefeeb9fe6fe}</Project>
       <Name>JHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="JHelper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
