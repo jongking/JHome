@@ -15,7 +15,9 @@
         <script src="resource/js/bootstrap.min.js"></script>
         <script src="resource/js/jquery.validate.js"></script>
         <script>
-            $("form").validate();
+            $(document).ready(function () {
+                $("#commentForm").validate();
+            });
         </script>
         <title>J</title>
     </head>
@@ -40,7 +42,7 @@
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control {required:true,minlength:5,messages:{required:'请输入内容'}}" placeholder="UserName" name="UserName">
+                            <input type="text" class="form-control" placeholder="UserName" name="UserName" required minlength="3">
                             <input type="text" class="form-control" placeholder="PassWord" name="PassWord">
                         </div>
                         <div class="btn-group" role="group" aria-label="...">
@@ -51,5 +53,19 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+        <div class="container-fluid">
+            <form class="cmxform" id="commentForm" method="post" action="">
+                <fieldset>
+                    <legend>Please enter your email address</legend>
+                    <p>
+                        <label for="cemail">E-Mail *</label>
+                        <input id="cemail" name="email" data-rule-required="true" data-rule-email="true" data-msg-required="Please enter your email address" data-msg-email="Please enter a valid email address">
+                    </p>
+                    <p>
+                        <input class="submit" type="submit" value="Submit">
+                    </p>
+                </fieldset>
+            </form>
+        </div>
     </body>
 </html>
