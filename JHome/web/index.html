@@ -21,6 +21,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $("form").validate();
+                $('[data-toggle="tooltip"]').tooltip()
             });
         </script>
         <title>J</title>
@@ -43,6 +44,7 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
                         <li><a href="#">Link</a></li>
+                        <li><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">

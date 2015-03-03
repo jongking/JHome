@@ -1,25 +1,38 @@
-﻿
-//改变validdate的默认错误提示方法
+﻿//改变validdate的默认错误提示方法
 $.validator.defaults.errorPlacement =
-    function (place, $element) {
+    function(place, $element) {
         //使用Bootstrap的提示框
-//        $element.tooltip({
-//            content: place[0].innerHTML,
-//            delay: { "show": 500, "hide": 100 },
-//            placement: "bottom",
-//        });
-        $element.popover({
-            content: place[0].innerHTML,
-            delay: { "show": 500, "hide": 100 },
-            placement: "bottom",
-        });
+        popoverValidator(place, $element);
     };
 $.validator.defaults.success =
-    function (place, $element) {
-        //使用Bootstrap的提示框
-        alert("seccess");
+    function (place, element) {
     };
-
+function tooltipValidator(place, $element) {
+    if ($element.data("tooltip") != place[0].innerHTML) {
+        $element.tooltip('destroy');
+        $element.data("tooltip", place[0].innerHTML);
+        $element.tooltip({
+            title: place[0].innerHTML,
+            animation: false,
+            placement: "bottom",
+            trigger: "manual",
+        });
+        $element.tooltip('show');
+    }
+}
+function popoverValidator(place, $element) {
+    if ($element.data("popover") != place[0].innerHTML) {
+        $element = $element.popover('destroy');
+        $element.data("popover", place[0].innerHTML);
+        $element.popover({
+            content: place[0].innerHTML,
+            animation: false,
+            placement: "bottom",
+            trigger: "manual",
+        });
+        $element.popover('show');
+    }
+}
 /*
  * Translated default messages for the jQuery validation plugin.
  * Locale: ZH (Chinese, 中文 (Zhōngwén), 汉语, 漢語)
