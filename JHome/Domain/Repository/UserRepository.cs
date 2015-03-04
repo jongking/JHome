@@ -9,64 +9,64 @@ using NHibernate.Criterion;
 
 namespace Domain.Repository
 {
-    public class ProductRepository : IProductRepository
+    public class UserRepository : IUserRepository
     {
-        public void Add(Product product)
+        public void Add(Users users)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Save(product);
+                session.Save(users);
                 transaction.Commit();
             }
         }
 
-        public void Update(Product product)
+        public void Update(Users users)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Update(product);
+                session.Update(users);
                 transaction.Commit();
             }
         }
 
-        public void Remove(Product product)
+        public void Remove(Users users)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Delete(product);
+                session.Delete(users);
                 transaction.Commit();
             }
         }
 
-        public Product GetById(Guid productId)
+        public Users GetById(Guid productId)
         {
             using (ISession session = NHibernateHelper.OpenSession())
-                return session.Get<Product>(productId);
+                return session.Get<Users>(productId);
         }
 
-        public Product GetByName(string name)
+        public Users GetByUserName(string name)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                Product product = session
-                    .CreateCriteria(typeof(Product))
-                    .Add(Restrictions.Eq("Name", name))
-                    .UniqueResult<Product>();
-                return product;
+                Users users = session
+                    .CreateCriteria(typeof(Users))
+                    .Add(Restrictions.Eq("UserName", name))
+                    .UniqueResult<Users>();
+                return users;
             }
         }
 
-        public ICollection<Product> GetByCategory(string category)
+        public ICollection<Users> GetByPassWord(string category)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 var products = session
-                    .CreateCriteria(typeof(Product))
-                    .Add(Restrictions.Eq("Category", category))
-                    .List<Product>();
+                    .CreateCriteria(typeof(Users))
+                    .Add(Restrictions.Eq("PassWord", category))
+                    .List<Users>();
                 return products;
             }
         }

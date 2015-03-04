@@ -16,7 +16,7 @@ namespace Domain
                 {
                     var configuration = new Configuration();
                     configuration.Configure();
-                    configuration.AddAssembly(typeof(Product).Assembly);
+                    configuration.AddAssembly(typeof(Users).Assembly);
                     _sessionFactory = configuration.BuildSessionFactory();
                 }
                 return _sessionFactory;

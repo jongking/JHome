@@ -1,37 +1,38 @@
-﻿//改变validdate的默认错误提示方法
+﻿//初始化validate
+$(document).ready(function () {
+    $("form").validate();
+});
+//改变validdate的默认错误提示方法
 $.validator.defaults.errorPlacement =
     function(place, $element) {
         //使用Bootstrap的提示框
-        popoverValidator(place, $element);
+        tooltipValidator(place, $element);
     };
 $.validator.defaults.success =
     function (place, element) {
     };
+
 function tooltipValidator(place, $element) {
-    if ($element.data("tooltip") != place[0].innerHTML) {
-        $element.tooltip('destroy');
-        $element.data("tooltip", place[0].innerHTML);
-        $element.tooltip({
-            title: place[0].innerHTML,
-            animation: false,
-            placement: "bottom",
-            trigger: "manual",
-        });
-        $element.tooltip('show');
-    }
+    $element.tooltip('destroy');
+    $element.data("tooltip", place[0].innerHTML);
+    $element.tooltip({
+        title: place[0].innerHTML,
+        animation: false,
+        placement: "bottom",
+        trigger: "manual",
+    });
+    $element.tooltip('show');
 }
 function popoverValidator(place, $element) {
-    if ($element.data("popover") != place[0].innerHTML) {
-        $element = $element.popover('destroy');
-        $element.data("popover", place[0].innerHTML);
-        $element.popover({
-            content: place[0].innerHTML,
-            animation: false,
-            placement: "bottom",
-            trigger: "manual",
-        });
-        $element.popover('show');
-    }
+    $element = $element.popover('destroy');
+    $element.data("popover", place[0].innerHTML);
+    $element.popover({
+        content: place[0].innerHTML,
+        animation: false,
+        placement: "bottom",
+        trigger: "manual",
+    });
+    $element.popover('show');
 }
 /*
  * Translated default messages for the jQuery validation plugin.

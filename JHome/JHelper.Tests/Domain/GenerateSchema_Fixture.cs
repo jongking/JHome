@@ -13,9 +13,9 @@ namespace JHelper.Tests.Domain
         {
             var cfg = new Configuration();
             cfg.Configure();
-            cfg.AddAssembly(typeof(Product).Assembly);
+            cfg.AddAssembly(typeof(Users).Assembly);
 
-            new SchemaExport(cfg).Execute(true, true, true);
+            new SchemaExport(cfg).Execute(true, true, false);
         }
     }
 }

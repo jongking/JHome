@@ -15,13 +15,13 @@ namespace JHelper.Tests.Domain
         private ISessionFactory _sessionFactory;
         private Configuration _configuration;
 
-        private readonly Product[] _products = new[]
+        private readonly Users[] _userses = new[]
                  {
-                     new Product {Name = "Melon", Category = "Fruits"},
-                     new Product {Name = "Pear", Category = "Fruits"},
-                     new Product {Name = "Milk", Category = "Beverages"},
-                     new Product {Name = "Coca Cola", Category = "Beverages"},
-                     new Product {Name = "Pepsi Cola", Category = "Beverages"},
+                     new Users {UserName = "Melon", PassWord = "Fruits"},
+                     new Users {UserName = "Pear", PassWord = "Fruits"},
+                     new Users {UserName = "Milk", PassWord = "Beverages"},
+                     new Users {UserName = "Coca Cola", PassWord = "Beverages"},
+                     new Users {UserName = "Pepsi Cola", PassWord = "Beverages"},
                  };
 
         private void CreateInitialData()
@@ -30,7 +30,7 @@ namespace JHelper.Tests.Domain
             using (ISession session = _sessionFactory.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                foreach (var product in _products)
+                foreach (var product in _userses)
                     session.Save(product);
                 transaction.Commit();
             }
@@ -47,55 +47,55 @@ namespace JHelper.Tests.Domain
         {
             _configuration = new Configuration();
             _configuration.Configure();
-            _configuration.AddAssembly(typeof(Product).Assembly);
+            _configuration.AddAssembly(typeof(Users).Assembly);
             _sessionFactory = _configuration.BuildSessionFactory();
         }
 
         [Test]
         public void Can_add_new_product()
         {
-            var product = new Product { Name = "Apple", Category = "Fruits" };
-            IProductRepository repository = new ProductRepository();
-            repository.Add(product);
+            var user = new Users { UserName = "Jongking", PassWord = "sssaaa" };
+            IUserRepository repository = new UserRepository();
+            repository.Add(user);
 
-            // use session to try to load the product
+            // use session to try to load the Users
             using (ISession session = _sessionFactory.OpenSession())
             {
-                var fromDb = session.Get<Product>(product.Id);
-                // Test that the product was successfully inserted
+                var fromDb = session.Get<Users>(user.Id);
+                // Test that the Users was successfully inserted
                 Assert.IsNotNull(fromDb);
-                Assert.AreNotSame(product, fromDb);
-                Assert.AreEqual(product.Name, fromDb.Name);
-                Assert.AreEqual(product.Category, fromDb.Category);
+                Assert.AreNotSame(user, fromDb);
+                Assert.AreEqual(user.UserName, fromDb.UserName);
+                Assert.AreEqual(user.PassWord, fromDb.PassWord);
             }
         }
 
         [Test]
         public void Can_update_existing_product()
         {
-            var product = _products[0];
-            product.Name = "Yellow Pear";
-            IProductRepository repository = new ProductRepository();
-            repository.Update(product);
+            var user = _userses[0];
+            user.UserName = "Yellow Pear";
+            IUserRepository repository = new UserRepository();
+            repository.Update(user);
 
-            // use session to try to load the product
+            // use session to try to load the Users
             using (ISession session = _sessionFactory.OpenSession())
             {
-                var fromDb = session.Get<Product>(product.Id);
-                Assert.AreEqual(product.Name, fromDb.Name);
+                var fromDb = session.Get<Users>(user.Id);
+                Assert.AreEqual(user.UserName, fromDb.UserName);
             }
         }
 
         [Test]
         public void Can_remove_existing_product()
         {
-            var product = _products[0];
-            IProductRepository repository = new ProductRepository();
-            repository.Remove(product);
+            var user = _userses[0];
+            IUserRepository repository = new UserRepository();
+            repository.Remove(user);
 
             using (ISession session = _sessionFactory.OpenSession())
             {
-                var fromDb = session.Get<Product>(product.Id);
+                var fromDb = session.Get<Users>(user.Id);
                 Assert.IsNull(fromDb);
             }
         }
@@ -103,39 +103,39 @@ namespace JHelper.Tests.Domain
         [Test]
         public void Can_get_existing_product_by_id()
         {
-            IProductRepository repository = new ProductRepository();
-            var fromDb = repository.GetById(_products[1].Id);
+            IUserRepository repository = new UserRepository();
+            var fromDb = repository.GetById(_userses[1].Id);
             Assert.IsNotNull(fromDb);
-            Assert.AreNotSame(_products[1], fromDb);
-            Assert.AreEqual(_products[1].Name, fromDb.Name);
+            Assert.AreNotSame(_userses[1], fromDb);
+            Assert.AreEqual(_userses[1].UserName, fromDb.UserName);
         }
 
         [Test]
         public void Can_get_existing_product_by_name()
         {
-            IProductRepository repository = new ProductRepository();
-            var fromDb = repository.GetByName(_products[1].Name);
+            IUserRepository repository = new UserRepository();
+            var fromDb = repository.GetByUserName(_userses[1].UserName);
 
             Assert.IsNotNull(fromDb);
-            Assert.AreNotSame(_products[1], fromDb);
-            Assert.AreEqual(_products[1].Id, fromDb.Id);
+            Assert.AreNotSame(_userses[1], fromDb);
+            Assert.AreEqual(_userses[1].Id, fromDb.Id);
         }
 
         [Test]
         public void Can_get_existing_products_by_category()
         {
-            IProductRepository repository = new ProductRepository();
-            var fromDb = repository.GetByCategory("Fruits");
+            IUserRepository repository = new UserRepository();
+            var fromDb = repository.GetByPassWord("Fruits");
 
             Assert.AreEqual(2, fromDb.Count);
-            Assert.IsTrue(IsInCollection(_products[0], fromDb));
-            Assert.IsTrue(IsInCollection(_products[1], fromDb));
+            Assert.IsTrue(IsInCollection(_userses[0], fromDb));
+            Assert.IsTrue(IsInCollection(_userses[1], fromDb));
         }
 
-        private bool IsInCollection(Product product, ICollection<Product> fromDb)
+        private bool IsInCollection(Users users, ICollection<Users> fromDb)
         {
             foreach (var item in fromDb)
-                if (product.Id == item.Id)
+                if (users.Id == item.Id)
                     return true;
             return false;
         }

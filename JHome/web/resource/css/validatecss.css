@@ -1,5 +1,25 @@
 ﻿input.error {
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    border-color: #a94442;
+    border-color: #c9302c;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    color: #ac2925;
+}
+
+input.error:focus {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+    border-color: #843534;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+
+input.valid {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    border-color: #5cb85c;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    color: #4cae4c;
+}
+
+input.valid:focus {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+    border-color: #5cb85c;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
 }

@@ -14,4 +14,4 @@ H:\GitHub\JHome\JHome\JHelper.Tests\obj\Debug\JHelper.Tests.dll
 H:\GitHub\JHome\JHome\JHelper.Tests\obj\Debug\JHelper.Tests.pdb
 H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Domain.dll
 H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Domain.pdb
-H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Mappings\people.hbm.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Mappings\user.hbm.xml
