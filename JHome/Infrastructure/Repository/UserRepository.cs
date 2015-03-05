@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Domain.IRepository;
 using Domain.Model;
+using Infrastructure;
 using NHibernate;
 using NHibernate.Criterion;
 

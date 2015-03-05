@@ -1,13 +1,8 @@
-H:\GitHub\JHome\JHome\Domain\bin\Debug\hibernate.cfg.xml
 H:\GitHub\JHome\JHome\Domain\bin\Debug\Domain.dll
 H:\GitHub\JHome\JHome\Domain\bin\Debug\Domain.pdb
 H:\GitHub\JHome\JHome\Domain\bin\Debug\Iesi.Collections.dll
-H:\GitHub\JHome\JHome\Domain\bin\Debug\JHelper.dll
 H:\GitHub\JHome\JHome\Domain\bin\Debug\NHibernate.dll
-H:\GitHub\JHome\JHome\Domain\bin\Debug\JHelper.pdb
 H:\GitHub\JHome\JHome\Domain\bin\Debug\Iesi.Collections.xml
 H:\GitHub\JHome\JHome\Domain\bin\Debug\NHibernate.xml
-H:\GitHub\JHome\JHome\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
 H:\GitHub\JHome\JHome\Domain\obj\Debug\Domain.dll
 H:\GitHub\JHome\JHome\Domain\obj\Debug\Domain.pdb
-H:\GitHub\JHome\JHome\Domain\bin\Debug\Mappings\user.hbm.xml

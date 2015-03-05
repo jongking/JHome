@@ -2,7 +2,7 @@
 using NHibernate;
 using NHibernate.Cfg;
 
-namespace Domain
+namespace Infrastructure
 {
     public class NHibernateHelper
     {

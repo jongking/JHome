@@ -32,6 +32,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JHelper.Tests", "JHelper.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{AE3DE55F-8B5D-4208-AE9A-A01824D5B2DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{8D7F746F-4D9D-4DE6-B83D-0FC47AD72FFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{186D106D-F28E-4390-B52A-8D537036B653}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +58,14 @@ Global
 		{AE3DE55F-8B5D-4208-AE9A-A01824D5B2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE3DE55F-8B5D-4208-AE9A-A01824D5B2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE3DE55F-8B5D-4208-AE9A-A01824D5B2DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D7F746F-4D9D-4DE6-B83D-0FC47AD72FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D7F746F-4D9D-4DE6-B83D-0FC47AD72FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D7F746F-4D9D-4DE6-B83D-0FC47AD72FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D7F746F-4D9D-4DE6-B83D-0FC47AD72FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{186D106D-F28E-4390-B52A-8D537036B653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186D106D-F28E-4390-B52A-8D537036B653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186D106D-F28E-4390-B52A-8D537036B653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186D106D-F28E-4390-B52A-8D537036B653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
