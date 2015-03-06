@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\GenerateSchema_Fixture.cs" />
-    <Compile Include="Domain\ProductRepository_Fixture.cs" />
+    <Compile Include="Domain\UsersRepository_Fixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

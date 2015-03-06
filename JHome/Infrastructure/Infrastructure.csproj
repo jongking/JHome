@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
@@ -62,11 +61,18 @@
       <Project>{ae3de55f-8b5d-4208-ae9a-a01824d5b2df}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JHelper\JHelper.csproj">
+      <Project>{79c77b98-d95c-4c69-b594-aefeeb9fe6fe}</Project>
+      <Name>JHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mappings\users.hbm.xml">
+    <EmbeddedResource Include="Mappings\Users.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

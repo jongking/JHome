@@ -1,5 +1,5 @@
-H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\Mappings\users.hbm.xml
 H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\hibernate.cfg.xml
+H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\Mappings\Users.hbm.xml
 H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\Infrastructure.dll
 H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\Infrastructure.pdb
 H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\Domain.dll
@@ -11,3 +11,5 @@ H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\NHibernate.xml
 H:\GitHub\JHome\JHome\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
 H:\GitHub\JHome\JHome\Infrastructure\obj\Debug\Infrastructure.dll
 H:\GitHub\JHome\JHome\Infrastructure\obj\Debug\Infrastructure.pdb
+H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\JHelper.dll
+H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\JHelper.pdb
