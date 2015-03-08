@@ -18,7 +18,29 @@
         <script src="resource/js/jquery.metadata.js" type="text/javascript"></script>
         <script src="resource/js/jquery.validate.js" type="text/javascript"></script>
         <script src="resource/js/SetUp.js" type="text/javascript"></script>
+        <script src="resource/js/Helper.js" type="text/javascript"></script>
         <title>J</title>
+        <script>
+            $(function() {
+                J.GetJSON("api/user.aspx", "Get", {
+                    username: "username",
+                    content: "content"
+                }, function(msg) {
+                    alert(msg);
+                });
+//                $.ajax({
+//                    type: "GET",
+//                    url: "api/user.aspx",
+//                    data: { action: "Get", username: "username", content: "content" },
+//                    dataType: "json",
+//                    success: function (msg) {
+//                        var result = $.parseJSON(msg.Date);
+//                        var result2 = $.parseJSON(result.one);
+//                        alert(result2);
+//                    }
+//                });
+            });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
