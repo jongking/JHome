@@ -12,49 +12,57 @@ namespace JHelper.Tests.Domain
     [TestFixture]
     public class UsersRepository_Fixture
     {
-        private ISessionFactory _sessionFactory;
-        private Configuration _configuration;
-
-        private readonly Users[] _userses = new[]
-                 {
-                     new Users {UserName = "Melon", PassWord = "Fruits"},
-                     new Users {UserName = "Pear", PassWord = "Fruits"},
-                     new Users {UserName = "Milk", PassWord = "Beverages"},
-                     new Users {UserName = "Coca Cola", PassWord = "Beverages"},
-                     new Users {UserName = "Pepsi Cola", PassWord = "Beverages"},
-                 };
-
-        private void CreateInitialData()
-        {
-
-            using (ISession session = _sessionFactory.OpenSession())
-            using (ITransaction transaction = session.BeginTransaction())
-            {
-                foreach (var product in _userses)
-                    session.Save(product);
-                transaction.Commit();
-            }
-        }
-
         [SetUp]
         public void SetupContext()
         {
             new SchemaExport(_configuration).Execute(false, true, false);
             CreateInitialData();
         }
+
+        private ISessionFactory _sessionFactory;
+        private Configuration _configuration;
+
+        private readonly Users[] _userses =
+        {
+            new Users {UserName = "Melon", PassWord = "Fruits"},
+            new Users {UserName = "Pear", PassWord = "Fruits"},
+            new Users {UserName = "Milk", PassWord = "Beverages"},
+            new Users {UserName = "Coca Cola", PassWord = "Beverages"},
+            new Users {UserName = "Pepsi Cola", PassWord = "Beverages"}
+        };
+
+        private void CreateInitialData()
+        {
+            using (ISession session = _sessionFactory.OpenSession())
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                foreach (Users user in _userses)
+                    session.Save(user);
+                transaction.Commit();
+            }
+        }
+
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
             _configuration = new Configuration();
             _configuration.Configure();
-            _configuration.AddAssembly(typeof(Users).Assembly);
+            _configuration.AddAssembly(typeof (Users).Assembly);
             _sessionFactory = _configuration.BuildSessionFactory();
         }
 
-        [Test]
-        public void Can_add_new_product()
+        private bool IsInCollection(Users users, ICollection<Users> fromDb)
         {
-            var user = new Users { UserName = "Jongking", PassWord = "sssaaa" };
+            foreach (Users item in fromDb)
+                if (users.Id == item.Id)
+                    return true;
+            return false;
+        }
+
+        [Test]
+        public void Can_add_new_user()
+        {
+            var user = new Users {UserName = "Jongking", PassWord = "sssaaa"};
             IUserRepository repository = new UserRepository();
             repository.Add(user);
 
@@ -71,25 +79,41 @@ namespace JHelper.Tests.Domain
         }
 
         [Test]
-        public void Can_update_existing_product()
+        public void Can_get_existing_user_by_id()
         {
-            var user = _userses[0];
-            user.UserName = "Yellow Pear";
             IUserRepository repository = new UserRepository();
-            repository.Update(user);
-
-            // use session to try to load the Users
-            using (ISession session = _sessionFactory.OpenSession())
-            {
-                var fromDb = session.Get<Users>(user.Id);
-                Assert.AreEqual(user.UserName, fromDb.UserName);
-            }
+            Users fromDb = repository.GetById(_userses[1].Id);
+            Assert.IsNotNull(fromDb);
+            Assert.AreNotSame(_userses[1], fromDb);
+            Assert.AreEqual(_userses[1].UserName, fromDb.UserName);
         }
 
         [Test]
-        public void Can_remove_existing_product()
+        public void Can_get_existing_user_by_name()
         {
-            var user = _userses[0];
+            IUserRepository repository = new UserRepository();
+            Users fromDb = repository.GetByUserName(_userses[1].UserName);
+
+            Assert.IsNotNull(fromDb);
+            Assert.AreNotSame(_userses[1], fromDb);
+            Assert.AreEqual(_userses[1].Id, fromDb.Id);
+        }
+
+        [Test]
+        public void Can_get_existing_users_by_category()
+        {
+            IUserRepository repository = new UserRepository();
+            ICollection<Users> fromDb = repository.GetByPassWord("Fruits");
+
+            Assert.AreEqual(2, fromDb.Count);
+            Assert.IsTrue(IsInCollection(_userses[0], fromDb));
+            Assert.IsTrue(IsInCollection(_userses[1], fromDb));
+        }
+
+        [Test]
+        public void Can_remove_existing_user()
+        {
+            Users user = _userses[0];
             IUserRepository repository = new UserRepository();
             repository.Remove(user);
 
@@ -101,43 +125,19 @@ namespace JHelper.Tests.Domain
         }
 
         [Test]
-        public void Can_get_existing_product_by_id()
+        public void Can_update_existing_user()
         {
+            Users user = _userses[0];
+            user.UserName = "Yellow Pear";
             IUserRepository repository = new UserRepository();
-            var fromDb = repository.GetById(_userses[1].Id);
-            Assert.IsNotNull(fromDb);
-            Assert.AreNotSame(_userses[1], fromDb);
-            Assert.AreEqual(_userses[1].UserName, fromDb.UserName);
-        }
+            repository.Update(user);
 
-        [Test]
-        public void Can_get_existing_product_by_name()
-        {
-            IUserRepository repository = new UserRepository();
-            var fromDb = repository.GetByUserName(_userses[1].UserName);
-
-            Assert.IsNotNull(fromDb);
-            Assert.AreNotSame(_userses[1], fromDb);
-            Assert.AreEqual(_userses[1].Id, fromDb.Id);
-        }
-
-        [Test]
-        public void Can_get_existing_products_by_category()
-        {
-            IUserRepository repository = new UserRepository();
-            var fromDb = repository.GetByPassWord("Fruits");
-
-            Assert.AreEqual(2, fromDb.Count);
-            Assert.IsTrue(IsInCollection(_userses[0], fromDb));
-            Assert.IsTrue(IsInCollection(_userses[1], fromDb));
-        }
-
-        private bool IsInCollection(Users users, ICollection<Users> fromDb)
-        {
-            foreach (var item in fromDb)
-                if (users.Id == item.Id)
-                    return true;
-            return false;
+            // use session to try to load the Users
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                var fromDb = session.Get<Users>(user.Id);
+                Assert.AreEqual(user.UserName, fromDb.UserName);
+            }
         }
     }
 }

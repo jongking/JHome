@@ -13,3 +13,5 @@ H:\GitHub\JHome\JHome\Infrastructure\obj\Debug\Infrastructure.dll
 H:\GitHub\JHome\JHome\Infrastructure\obj\Debug\Infrastructure.pdb
 H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\JHelper.dll
 H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\JHelper.pdb
+H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\nunit.framework.dll
+H:\GitHub\JHome\JHome\Infrastructure\bin\Debug\nunit.framework.xml

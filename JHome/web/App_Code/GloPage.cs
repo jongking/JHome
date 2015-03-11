@@ -11,7 +11,9 @@ using JHelper;
 /// </summary>
 public class GloPage : Page
 {
-    protected string Result = "";
+    protected string TextResult = "";
+
+    protected JsonResult JsonResult = new JsonResult();
     public string Action { get { return WebHelper.Request("action", Page); } }
     protected override void OnInit(EventArgs e)
     {
@@ -19,6 +21,17 @@ public class GloPage : Page
         {
             Response.End();
         }
+
+        try
+        {
+            ReflectionHelper.RunMethod(this, Action);
+        }
+        catch (NullReferenceException)
+        {
+            JsonResult.Code = JsonResult.ResultCode.错误;
+            JsonResult.ErrorReson = string.Format("no action [{0}]", Action);
+        }
+
         base.OnInit(e);
     }
 
@@ -27,8 +40,15 @@ public class GloPage : Page
         Response.Expires = -1;
         Response.Clear();
         Response.ContentEncoding = Encoding.UTF8;
-        Response.ContentType = "application/json";
-        Response.Write(Result);
+        if (TextResult.Length == 0)
+        {
+            Response.ContentType = "application/json";
+            Response.Write(JsonResult.ToString());
+        }
+        else
+        {
+            Response.Write(TextResult);
+        }
         Response.Flush();
         Response.End();
         base.OnLoadComplete(e);

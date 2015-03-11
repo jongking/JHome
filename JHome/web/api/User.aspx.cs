@@ -11,21 +11,13 @@ using JHelper;
 
 public partial class api_User : GloPage
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public void Reg()
     {
-        switch (Action)
+        var kv = new KeyValue
         {
-            case "Get":
-                Get();
-                break;
-        }
-    }
+            {"one", WebHelper.JsonSerialize(new Users())},
+        };
 
-    private void Get()
-    {
-        var jsonResult = new JsonResult();
-        var kv = new KeyValue {{"one", WebHelper.JsonSerialize(new Users())}};
-        jsonResult.SetDateByKeyValue(kv);
-        Result = jsonResult.ToString();
+        JsonResult.SetDateByKeyValue(kv);
     }
 }

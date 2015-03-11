@@ -3,6 +3,9 @@ using NHibernate.Cfg;
 
 namespace Infrastructure
 {
+    /// <summary>
+    /// NHibernate帮助方法
+    /// </summary>
     public class NHibernateHelper
     {
         private static ISessionFactory _sessionFactory;

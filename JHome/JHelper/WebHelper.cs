@@ -7,6 +7,9 @@ using System.Web.Script.Serialization;
 
 namespace JHelper
 {
+    /// <summary>
+    /// web帮助方法
+    /// </summary>
     public static class WebHelper
     {
         public static string Request(string key, Page page)
