@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Application.ApplicationImpl;
+using Application.IApplication;
 using Domain.Model;
 using JHelper;
 
@@ -13,11 +15,15 @@ public partial class api_User : GloPage
 {
     public void Reg()
     {
+        var userName = WebHelper.Request("UserName", Page);
+        var passWord = WebHelper.Request("PassWord", Page);
+        IUserApplication iUserApplication = new UserApplication();
+        iUserApplication.Reg(userName, passWord);
+
         var kv = new KeyValue
         {
-            {"one", WebHelper.JsonSerialize(new Users())},
+            {"OK", "OK"},
         };
-
         JsonResult.SetDateByKeyValue(kv);
     }
 }

@@ -1,73 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Domain.IRepository;
 using Domain.Model;
-using Infrastructure;
 using NHibernate;
 using NHibernate.Criterion;
 
-namespace Domain.Repository
+namespace Infrastructure.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public void Add(Users users)
+        public void Add(User user)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Save(users);
+                session.Save(user);
                 transaction.Commit();
             }
         }
 
-        public void Update(Users users)
+        public void Update(User user)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Update(users);
+                session.Update(user);
                 transaction.Commit();
             }
         }
 
-        public void Remove(Users users)
+        public void Remove(User user)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Delete(users);
+                session.Delete(user);
                 transaction.Commit();
             }
         }
 
-        public Users GetById(Guid productId)
+        public User GetById(Guid productId)
         {
             using (ISession session = NHibernateHelper.OpenSession())
-                return session.Get<Users>(productId);
+                return session.Get<User>(productId);
         }
 
-        public Users GetByUserName(string name)
+        public User GetByUserName(string name)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                Users users = session
-                    .CreateCriteria(typeof(Users))
+                User user = session
+                    .CreateCriteria(typeof(User))
                     .Add(Restrictions.Eq("UserName", name))
-                    .UniqueResult<Users>();
-                return users;
+                    .UniqueResult<User>();
+                return user;
             }
         }
 
-        public ICollection<Users> GetByPassWord(string category)
+        public ICollection<User> GetByPassWord(string category)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 var products = session
-                    .CreateCriteria(typeof(Users))
+                    .CreateCriteria(typeof(User))
                     .Add(Restrictions.Eq("PassWord", category))
-                    .List<Users>();
+                    .List<User>();
                 return products;
             }
         }

@@ -8,11 +8,11 @@ namespace Domain.IRepository
 {
     public interface IUserRepository
     {
-        void Add(Users users);
-        void Update(Users users);
-        void Remove(Users users);
-        Users GetById(Guid productId);
-        Users GetByUserName(string name);
-        ICollection<Users> GetByPassWord(string category);
+        void Add(User user);
+        void Update(User user);
+        void Remove(User user);
+        User GetById(Guid productId);
+        User GetByUserName(string name);
+        ICollection<User> GetByPassWord(string category);
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.UI;
+using Domain.Exception;
 using JHelper;
 
 /// <summary>
@@ -31,7 +33,29 @@ public class GloPage : Page
             JsonResult.Code = JsonResult.ResultCode.错误;
             JsonResult.ErrorReson = string.Format("no action [{0}]", Action);
         }
-
+        catch (TargetInvocationException exception)
+        {
+            if (exception.InnerException.GetType() == typeof (JException))
+            {
+                var ex = (JException) exception.InnerException;
+                JsonResult.Code = JsonResult.ResultCode.错误;
+                JsonResult.ErrorReson = string.Format("错误类型为{1},错误信息为{0}", ex.Message, ex.ExceptionType);
+            }
+            else
+            {
+                JsonResult.Code = JsonResult.ResultCode.错误;
+                JsonResult.ErrorReson = string.Format("错误信息为{0}", exception.Message);
+            }
+        }
+        catch (JException jException)
+        {
+            JsonResult.Code = JsonResult.ResultCode.错误;
+            JsonResult.ErrorReson = string.Format("错误类型为{1},错误信息为{0}", jException.Message, jException.ExceptionType);
+        }
+        finally
+        {
+            
+        }
         base.OnInit(e);
     }
 

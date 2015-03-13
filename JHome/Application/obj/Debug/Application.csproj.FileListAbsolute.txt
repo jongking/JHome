@@ -1,0 +1,7 @@
+H:\GitHub\JHome\JHome\Application\bin\Debug\Application.dll
+H:\GitHub\JHome\JHome\Application\bin\Debug\Application.pdb
+H:\GitHub\JHome\JHome\Application\bin\Debug\Domain.dll
+H:\GitHub\JHome\JHome\Application\bin\Debug\Domain.pdb
+H:\GitHub\JHome\JHome\Application\obj\Debug\Application.csprojResolveAssemblyReference.cache
+H:\GitHub\JHome\JHome\Application\obj\Debug\Application.dll
+H:\GitHub\JHome\JHome\Application\obj\Debug\Application.pdb
