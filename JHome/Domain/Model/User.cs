@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using Domain.Exception;
-using Domain.Factory;
 using Domain.IRepository;
+using Factory;
 
 namespace Domain.Model
 {

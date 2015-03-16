@@ -9,7 +9,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web", "http://localhost:720
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{79c77b98-d95c-4c69-b594-aefeeb9fe6fe}|JHelper.dll;{ae3de55f-8b5d-4208-ae9a-a01824d5b2df}|Domain.dll;{186d106d-f28e-4390-b52a-8d537036b653}|Application.dll;"
+		ProjectReferences = "{ae3de55f-8b5d-4208-ae9a-a01824d5b2df}|Domain.dll;{186d106d-f28e-4390-b52a-8d537036b653}|Application.dll;{8d7f746f-4d9d-4de6-b83d-0fc47ad72fff}|Infrastructure.dll;{5DC7428C-E268-444D-A4D6-B2648F572EF2}|Factory.dll;{79c77b98-d95c-4c69-b594-aefeeb9fe6fe}|JHelper.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_7204"
 		Debug.AspNetCompiler.PhysicalPath = "web\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7204\"
@@ -35,6 +35,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{8D7F746F-4D9D-4DE6-B83D-0FC47AD72FFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{186D106D-F28E-4390-B52A-8D537036B653}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factory", "Factory\Factory.csproj", "{5DC7428C-E268-444D-A4D6-B2648F572EF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{186D106D-F28E-4390-B52A-8D537036B653}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{186D106D-F28E-4390-B52A-8D537036B653}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{186D106D-F28E-4390-B52A-8D537036B653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DC7428C-E268-444D-A4D6-B2648F572EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DC7428C-E268-444D-A4D6-B2648F572EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DC7428C-E268-444D-A4D6-B2648F572EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DC7428C-E268-444D-A4D6-B2648F572EF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

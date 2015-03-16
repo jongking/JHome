@@ -40,13 +40,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exception\JException.cs" />
-    <Compile Include="Factory\RepositoryFactory.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Factory\Factory.csproj">
+      <Project>{5dc7428c-e268-444d-a4d6-b2648f572ef2}</Project>
+      <Name>Factory</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

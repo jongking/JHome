@@ -18,7 +18,7 @@ namespace Infrastructure
                 {
                     var configuration = new Configuration();
                     configuration.Configure();
-//                    configuration.AddAssembly(typeof(Users).Assembly);
+//                    configuration.AddAssembly(typeof(User).Assembly);
                     _sessionFactory = configuration.BuildSessionFactory();
                 }
                 return _sessionFactory;

@@ -17,7 +17,7 @@ public partial class api_User : GloPage
     {
         var userName = WebHelper.Request("UserName", Page);
         var passWord = WebHelper.Request("PassWord", Page);
-        IUserApplication iUserApplication = new UserApplication();
+        var iUserApplication = Factory.ApplicationFactory.CreateInstance<IUserApplication>("User");
         iUserApplication.Reg(userName, passWord);
 
         var kv = new KeyValue
