@@ -38,19 +38,16 @@ public class GloPage : Page
             if (exception.InnerException.GetType() == typeof (JException))
             {
                 var ex = (JException) exception.InnerException;
-                JsonResult.Code = JsonResult.ResultCode.错误;
-                JsonResult.ErrorReson = string.Format("错误类型为{1},错误信息为{0}", ex.Message, ex.ExceptionType);
+                JsonResult.Error(ex.Message);
             }
             else
             {
-                JsonResult.Code = JsonResult.ResultCode.错误;
-                JsonResult.ErrorReson = string.Format("错误信息为{0}", exception.Message);
+                JsonResult.Error(exception.Message);
             }
         }
         catch (JException jException)
         {
-            JsonResult.Code = JsonResult.ResultCode.错误;
-            JsonResult.ErrorReson = string.Format("错误类型为{1},错误信息为{0}", jException.Message, jException.ExceptionType);
+            JsonResult.Error(jException.Message);
         }
         finally
         {

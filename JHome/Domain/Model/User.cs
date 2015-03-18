@@ -17,6 +17,7 @@ namespace Domain.Model
         {
         }
 
+        private readonly IUserRepository _userRepository = RepositoryFactory.CreateInstance<IUserRepository>("User");
         public User(string userName, string passWord)
         {
             UserName = userName;
@@ -27,10 +28,21 @@ namespace Domain.Model
         public bool Reg()
         {
             Check();
-            var userRepository = RepositoryFactory.CreateInstance<IUserRepository>("User");
-            var nowUsers = userRepository.GetByUserName(UserName);
-            if (nowUsers != null) { throw new JException("会员名称重复", ExceptionType.领域模型自检); }
+
+            CheckUserRepeat(UserName);
+
+            _userRepository.Add(this);
+
             return true;
+        }
+
+        private void CheckUserRepeat(string userName)
+        {
+            var nowUsers = _userRepository.GetByUserName(userName);
+            if (nowUsers != null)
+            {
+                throw new JException("会员名称重复", ExceptionType.领域模型自检);
+            }
         }
 
         /// <summary>
@@ -38,11 +50,11 @@ namespace Domain.Model
         /// </summary>
         private void Check()
         {
-            if (UserName == null || UserName.Length <= 6)
+            if (UserName == null || UserName.Length < 6)
             {
                 throw new JException("User.UserName Error", ExceptionType.领域模型自检);
             }
-            if (PassWord == null || PassWord.Length <= 6)
+            if (PassWord == null || PassWord.Length < 6)
             {
                 throw new JException("User.PassWord Error", ExceptionType.领域模型自检);
             }

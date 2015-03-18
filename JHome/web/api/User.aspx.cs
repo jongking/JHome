@@ -13,17 +13,12 @@ using JHelper;
 
 public partial class api_User : GloPage
 {
+    private readonly IUserApplication _iUserApplication = Factory.ApplicationFactory.CreateInstance<IUserApplication>("User");
+
     public void Reg()
     {
         var userName = WebHelper.Request("UserName", Page);
         var passWord = WebHelper.Request("PassWord", Page);
-        var iUserApplication = Factory.ApplicationFactory.CreateInstance<IUserApplication>("User");
-        iUserApplication.Reg(userName, passWord);
-
-        var kv = new KeyValue
-        {
-            {"OK", "OK"},
-        };
-        JsonResult.SetDateByKeyValue(kv);
+        _iUserApplication.Reg(userName, passWord);
     }
 }
