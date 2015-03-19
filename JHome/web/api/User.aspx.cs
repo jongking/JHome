@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Activities.Expressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,26 @@ public partial class api_User : GloPage
     {
         var userName = WebHelper.Request("UserName", Page);
         var passWord = WebHelper.Request("PassWord", Page);
+        
         _iUserApplication.Reg(userName, passWord);
+    }
+
+    public void Login()
+    {
+        var userName = WebHelper.Request("UserName", Page);
+        var passWord = WebHelper.Request("PassWord", Page);
+
+        Helper.SetAuthen(userName, Page);
+    }
+
+    public void Check()
+    {
+        if (Helper.CheckAuthen(Page))
+        {
+            JsonResult.SetDateByKeyValue(new KeyValue
+            {
+                { "Login", "true" },
+            });
+        }
     }
 }

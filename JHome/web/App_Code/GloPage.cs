@@ -63,6 +63,7 @@ public class GloPage : Page
         Response.ContentEncoding = Encoding.UTF8;
         if (TextResult.Length == 0)
         {
+            if (JsonResult.Date == "") JsonResult.SetDateByKeyValue(new KeyValue());
             Response.ContentType = "application/json";
             Response.Write(JsonResult.ToString());
         }
