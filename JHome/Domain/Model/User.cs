@@ -59,5 +59,14 @@ namespace Domain.Model
                 throw new JException("User.PassWord Error", ExceptionType.领域模型自检);
             }
         }
+
+        public bool Login()
+        {
+            Check();
+
+            var user = _userRepository.GetByUserName(UserName);
+
+            return user != null && user.PassWord == PassWord;
+        }
     }
 }

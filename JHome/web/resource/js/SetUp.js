@@ -57,3 +57,28 @@ $.extend($.validator.messages, {
     max: $.validator.format("请输入不大于 {0} 的数值"),
     min: $.validator.format("请输入不小于 {0} 的数值")
 });
+
+//设置alertModel
+var alertModel = "<div id=\"AlertModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\"><div class=\"modal-dialog modal-sm\"><div class=\"modal-content\" id=\"AlertShow\"></div></div></div>";
+$(document).ready(function() {
+    $("body").append(alertModel);
+});
+J.alert = function(obj) {
+    $("#AlertShow").html(obj);
+    $("#AlertModal").modal({});
+}
+
+//获取登录信息
+J.GetJSONSync("api/user.aspx", "Check", {}, function (msg) {
+    if (msg.Login != undefined) {
+        J.User = msg;
+    }
+});
+
+//JHome中单独使用的函数
+J.JHome = {
+    LogOut:function() {
+        document.cookie = "J_UserName=1; path=/";
+//        document.cookie = "J_Key=1; path=/";
+    }
+}

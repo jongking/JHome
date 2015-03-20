@@ -17,7 +17,8 @@ namespace Application.ApplicationImpl
 
         public bool Login(string userName, string passWord)
         {
-            throw new NotImplementedException();
+            var user = new User(userName, passWord);
+            return user.Login();
         }
     }
 }

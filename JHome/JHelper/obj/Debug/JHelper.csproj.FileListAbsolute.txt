@@ -9,3 +9,4 @@ H:\GitHub\JHome\JHome\JHelper\bin\Debug\nunit.framework.xml
 H:\GitHub\JHome\JHome\JHelper\obj\Debug\JHelper.dll
 H:\GitHub\JHome\JHome\JHelper\obj\Debug\JHelper.pdb
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\hibernate.cfg.xml
+H:\GitHub\JHome\JHome\JHelper\obj\Debug\JHelper.csprojResolveAssemblyReference.cache
