@@ -59,11 +59,21 @@ $.extend($.validator.messages, {
 });
 
 //设置alertModel
-var alertModel = "<div id=\"AlertModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\"><div class=\"modal-dialog modal-sm\"><div class=\"modal-content\" id=\"AlertShow\"></div></div></div>";
+var alertModel = "<div id=\"AlertModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\"><div class=\"modal-dialog modal-sm\"><div id='AlertType' class=\"modal-content alert alert-danger\"><div class=\"modal-header\" data-dismiss=\"modal\" id='AlertMsg'></div><div id=\"AlertShow\" class=\"modal-body\"></div></div></div></div>";
 $(document).ready(function() {
     $("body").append(alertModel);
 });
-J.alert = function(obj) {
+J.error = function (obj) {
+    $("#AlertMsg").html("<h4>Error</h4>");
+    $("#AlertType").removeClass("alert-success");
+    $("#AlertType").addClass("alert-danger");
+    $("#AlertShow").html(obj);
+    $("#AlertModal").modal({});
+}
+J.alert = function (obj) {
+    $("#AlertMsg").html("<h4>Message</h4>");
+    $("#AlertType").removeClass("alert-danger");
+    $("#AlertType").addClass("alert-success");
     $("#AlertShow").html(obj);
     $("#AlertModal").modal({});
 }

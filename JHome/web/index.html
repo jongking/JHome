@@ -22,43 +22,13 @@
     <script src="resource/js/SetUp.js" type="text/javascript"></script>
     <title>J</title>
     <script>
-        $(document).ready(function () {
-            if (J.User == undefined) {
-                $("#LoginShowMenu").hide();
-            } else {
-                $("#RegForm").hide();
-                $(".UserName").text(J.User.UserName);
-                $("#LogOutA").bind("click", function () {
-                    J.JHome.LogOut();
-                });
-            }
-
-            $("#RegButton").bind("click", function (e) {
-                e.preventDefault();
-                //检查是否验证通过
-                if ($("form").valid()) {
-                    J.GetJSONByForm("api/user.aspx", "Reg", $("#RegForm"), function(msg) {
-                        location.reload();
-                    });
-                }
-            });
-            $("#LoginButton").bind("click", function (e) {
-                e.preventDefault();
-                //检查是否验证通过
-                if ($("form").valid()) {
-                    J.GetJSONByForm("api/user.aspx", "Login", $("#RegForm"), function (msg) {
-                        location.reload();
-                    });
-                }
-            });
-        });
+        
     </script>
 </head>
 <body>
-    
-<nav class="navbar navbar-inverse">
+    <script src="resource/js/Layout/Header.js" type="text/javascript"></script>
+<!--<nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -69,7 +39,6 @@
             <a class="navbar-brand" href="#">JHome</a>
             <a class="navbar-brand" href="#">黑屋子</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
@@ -82,7 +51,7 @@
 
             <ul class="nav navbar-nav navbar-right" id="LoginShowMenu">
                 <li>
-                    <p class="navbar-text UserName"></p>
+                    <a href="#" class="UserName"></a>
                 </li>
                 <li>
                     <a href="" id="LogOutA">LogOut</a>
@@ -99,9 +68,9 @@
                     <button type="submit" class="btn btn-default" id="LoginButton">Login</button>
                 </div>
             </form>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+        </div>
+    </div>
+</nav>-->
 <div class="container-fluid" id="output"></div>
 </body>
 </html>

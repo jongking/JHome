@@ -9,7 +9,7 @@ namespace Domain.Model
     [Serializable]
     public class User
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string PassWord { get; set; }
 
@@ -39,7 +39,7 @@ namespace Domain.Model
         private void CheckUserRepeat(string userName)
         {
             var nowUsers = _userRepository.GetByUserName(userName);
-            if (nowUsers != null)
+            if (nowUsers.Id != 0)
             {
                 throw new JException("会员名称重复", ExceptionType.领域模型自检);
             }
@@ -54,7 +54,7 @@ namespace Domain.Model
             {
                 throw new JException("User.UserName Error", ExceptionType.领域模型自检);
             }
-            if (PassWord == null || PassWord.Length < 6)
+            if (PassWord == null || PassWord.Length < 8)
             {
                 throw new JException("User.PassWord Error", ExceptionType.领域模型自检);
             }
@@ -66,7 +66,7 @@ namespace Domain.Model
 
             var user = _userRepository.GetByUserName(UserName);
 
-            return user != null && user.PassWord == PassWord;
+            return user.Id != 0 && user.PassWord == PassWord;
         }
     }
 }

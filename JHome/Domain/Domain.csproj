@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Exception\JException.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
+    <Compile Include="Model\ChatMessage.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

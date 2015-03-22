@@ -2,71 +2,34 @@
 using System.Collections.Generic;
 using Domain.IRepository;
 using Domain.Model;
-using NHibernate;
-using NHibernate.Criterion;
+using JHelper.DB;
 
 namespace Infrastructure.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<User>,IUserRepository
     {
-        public void Add(User user)
-        {
-            using (ISession session = NHibernateHelper.OpenSession())
-            using (ITransaction transaction = session.BeginTransaction())
-            {
-                session.Save(user);
-                transaction.Commit();
-            }
-        }
-
-        public void Update(User user)
-        {
-            using (ISession session = NHibernateHelper.OpenSession())
-            using (ITransaction transaction = session.BeginTransaction())
-            {
-                session.Update(user);
-                transaction.Commit();
-            }
-        }
-
-        public void Remove(User user)
-        {
-            using (ISession session = NHibernateHelper.OpenSession())
-            using (ITransaction transaction = session.BeginTransaction())
-            {
-                session.Delete(user);
-                transaction.Commit();
-            }
-        }
-
         public User GetById(Guid productId)
         {
-            using (ISession session = NHibernateHelper.OpenSession())
-                return session.Get<User>(productId);
+            return DbHelper.GetModel<User>(
+                SimpleSqlCreater.Select<User>()
+                .Eq("Id", productId.ToString())
+                .ToString());
         }
 
         public User GetByUserName(string name)
         {
-            using (ISession session = NHibernateHelper.OpenSession())
-            {
-                User user = session
-                    .CreateCriteria(typeof(User))
-                    .Add(Restrictions.Eq("UserName", name))
-                    .UniqueResult<User>();
-                return user;
-            }
+            return DbHelper.GetModel<User>(
+                SimpleSqlCreater.Select<User>()
+                .Eq("UserName", name)
+                .ToString());
         }
 
         public ICollection<User> GetByPassWord(string category)
         {
-            using (ISession session = NHibernateHelper.OpenSession())
-            {
-                var products = session
-                    .CreateCriteria(typeof(User))
-                    .Add(Restrictions.Eq("PassWord", category))
-                    .List<User>();
-                return products;
-            }
+            return DbHelper.GetList<User>(
+                SimpleSqlCreater.Select<User>()
+                .Eq("PassWord", category)
+                .ToString());
         }
     }
 }

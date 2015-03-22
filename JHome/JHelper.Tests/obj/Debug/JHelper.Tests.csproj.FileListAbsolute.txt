@@ -1,5 +1,3 @@
-H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\hibernate.cfg.xml
-H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Mappings\Users.hbm.xml
 H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\JHelper.Tests.dll
 H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\JHelper.Tests.pdb
 H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Domain.dll
@@ -19,3 +17,14 @@ H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\JHelper.pdb
 H:\GitHub\JHome\JHome\JHelper.Tests\obj\Debug\JHelper.Tests.csprojResolveAssemblyReference.cache
 H:\GitHub\JHome\JHome\JHelper.Tests\obj\Debug\JHelper.Tests.dll
 H:\GitHub\JHome\JHome\JHelper.Tests\obj\Debug\JHelper.Tests.pdb
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.Unity.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.Unity.xml
+H:\GitHub\JHome\JHome\JHelper.Tests\bin\Debug\Microsoft.Practices.Unity.Interception.xml
