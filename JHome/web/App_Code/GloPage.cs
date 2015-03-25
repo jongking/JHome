@@ -42,7 +42,7 @@ public class GloPage : Page
             }
             else
             {
-                JsonResult.Error(exception.Message);
+                JsonResult.Error(exception.InnerException.Message);
             }
         }
         catch (JException jException)

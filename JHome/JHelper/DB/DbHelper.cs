@@ -5,6 +5,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Design;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
@@ -12,11 +13,24 @@ namespace JHelper.DB
 {
     public static class DbHelper
     {
+        public static bool IsDebug = false;
+
+        public static Dictionary<string, SqlDatabase> SqlServerDbPool = new Dictionary<string, SqlDatabase>();
         public static SqlDatabase GetDatabase(string name = "con")
         {
-            DatabaseProviderFactory factory = new DatabaseProviderFactory();
-            SqlDatabase sqlServerDb = factory.Create(name) as SqlDatabase;
-            return sqlServerDb;
+            if (SqlServerDbPool.ContainsKey(name))
+            {
+                return SqlServerDbPool[name];
+            }
+            else
+            {
+                DatabaseProviderFactory factory = null;
+                factory = IsDebug ? new DatabaseProviderFactory(new DesignConfigurationSource("./Web.config")) : new DatabaseProviderFactory();
+                SqlDatabase sqlServerDb = factory.Create(name) as SqlDatabase;
+                SqlServerDbPool.Add(name, sqlServerDb);
+                return sqlServerDb;
+            }
+            
         }
 
         public static int ExecuteNonQuery(string sql, string name = "con")

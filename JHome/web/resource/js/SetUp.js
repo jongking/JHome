@@ -1,6 +1,10 @@
 ﻿//初始化validate
 $(document).ready(function () {
-    $("form").validate();
+    var $form = $("form");
+    $.each($form, function(i, v) {
+        $(this).validate();
+    });
+//    $("form").validate();
 });
 //改变validdate的默认错误提示方法
 $.validator.defaults.errorPlacement =
@@ -79,7 +83,7 @@ J.alert = function (obj) {
 }
 
 //获取登录信息
-J.GetJSONSync("api/user.aspx", "Check", {}, function (msg) {
+J.GetJSONSync("../api/user.aspx", "Check", {}, function (msg) {
     if (msg.Login != undefined) {
         J.User = msg;
     }
