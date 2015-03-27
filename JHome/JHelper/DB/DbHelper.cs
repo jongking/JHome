@@ -5,6 +5,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Transactions;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Design;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
@@ -33,6 +34,11 @@ namespace JHelper.DB
             
         }
 
+        public static TransactionScope GetTransactionScope(TransactionScopeOption scopeOption = TransactionScopeOption.Required, int seconds = 30)
+        {
+            return new TransactionScope(scopeOption, TimeSpan.FromSeconds(seconds));
+        }
+
         public static int ExecuteNonQuery(string sql, string name = "con")
         {
             return GetDatabase(name).ExecuteNonQuery(CommandType.Text, sql);
@@ -48,14 +54,40 @@ namespace JHelper.DB
             return GetDatabase(name).ExecuteDataSet(CommandType.Text, sql);
         }
 
-//        public static IDataReader ExecuteReader(string sql, string name = "con")
-//        {
-        //            return GetDatabase(name).ExecuteReader(CommandType.Text, sql);
-//        }
+        public static IDataReader ExecuteReader(string sql, string name = "con")
+        {
+                    return GetDatabase(name).ExecuteReader(CommandType.Text, sql);
+        }
 
         public static DataTable ExecuteDataTable(string sql, string name = "con")
         {
             return GetDatabase(name).ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        }
+
+
+        public static int ExecuteNonQuery(DbCommand dbCommand, string name = "con")
+        {
+            return GetDatabase(name).ExecuteNonQuery(dbCommand);
+        }
+
+        public static object ExecuteScalar(DbCommand dbCommand, string name = "con")
+        {
+            return GetDatabase(name).ExecuteScalar(dbCommand);
+        }
+
+        public static DataSet ExecuteDataSet(DbCommand dbCommand, string name = "con")
+        {
+            return GetDatabase(name).ExecuteDataSet(dbCommand);
+        }
+
+        public static IDataReader ExecuteReader(DbCommand dbCommand, string name = "con")
+        {
+            return GetDatabase(name).ExecuteReader(dbCommand);
+        }
+
+        public static DataTable ExecuteDataTable(DbCommand dbCommand, string name = "con")
+        {
+            return GetDatabase(name).ExecuteDataSet(dbCommand).Tables[0];
         }
 
         public static bool TestConnection(string name = "con")
@@ -223,6 +255,51 @@ namespace JHelper.DB
         public static string GetTableFromClass<T>()
         {
             return typeof(T).Name + "T";
+        }
+
+        public static DataRow getModelToDataRow<T>(T model, DataTable dt)
+        {
+            Type tm = model.GetType();
+            DataRow dr = dt.NewRow();
+            foreach (DataColumn dc in dt.Columns)
+            {
+                string colName = dc.ColumnName;
+                if (colName.ToUpper().Equals("Evenid".ToUpper()))
+                    continue;
+                PropertyInfo pi = tm.GetProperty(colName);
+                object value = pi.GetValue(model, null);
+                if (pi.PropertyType.IsGenericType)
+                {
+                    if (pi.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        if (value == null) value = DBNull.Value;
+                    }
+                }
+                dr[colName] = value;
+            }
+            return dr;
+        }
+        public static DataRow getModelToDataRow<T>(T model, DataTable dt, string keyFieldName)
+        {
+            Type tm = model.GetType();
+            DataRow dr = dt.Rows[0];
+            foreach (DataColumn dc in dt.Columns)
+            {
+                string colName = dc.ColumnName;
+                if (colName.ToUpper().Equals("Evenid".ToUpper()) || colName.ToUpper().Equals(keyFieldName.ToUpper()))
+                    continue;
+                PropertyInfo pi = tm.GetProperty(colName);
+                object value = pi.GetValue(model, null);
+                if (pi.PropertyType.IsGenericType)
+                {
+                    if (pi.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        if (value == null) value = DBNull.Value;
+                    }
+                }
+                dr[colName] = value;
+            }
+            return dr;
         }
     }
 }

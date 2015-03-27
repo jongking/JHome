@@ -34,7 +34,7 @@ namespace JHelper.Tests
         [Test]
         public void Can_TransactionScope_Complete()
         {
-            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+            using (var scope = DbHelper.GetTransactionScope())
             {
                 DbHelper.ExecuteNonQuery("INSERT INTO NUnitT (No) VALUES ('1')");
                 DbHelper.ExecuteNonQuery("INSERT INTO NUnitT (No) VALUES ('2')");
@@ -46,7 +46,7 @@ namespace JHelper.Tests
         [Test]
         public void Can_TransactionScope_Not_Complete()
         {
-            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, TimeSpan.FromSeconds(30)))
+            using (var scope = DbHelper.GetTransactionScope())
             {
                 DbHelper.ExecuteNonQuery("INSERT INTO NUnitT (No) VALUES ('1')");
                 DbHelper.ExecuteNonQuery("INSERT INTO NUnitT (No) VALUES ('2')");

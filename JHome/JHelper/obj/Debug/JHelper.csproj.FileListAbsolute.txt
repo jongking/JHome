@@ -19,3 +19,4 @@ H:\GitHub\JHome\JHome\JHelper\bin\Debug\Microsoft.Practices.Unity.xml
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\Microsoft.Practices.Unity.Interception.xml
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+H:\GitHub\JHome\JHome\JHelper\obj\Debug\JHelper.csprojResolveAssemblyReference.cache
