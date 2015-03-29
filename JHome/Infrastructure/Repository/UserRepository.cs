@@ -8,7 +8,7 @@ namespace Infrastructure.Repository
 {
     public class UserRepository : BaseRepository<User>,IUserRepository
     {
-        public User GetById(Guid productId)
+        public User GetById(int productId)
         {
             return DbHelper.GetModel<User>(
                 SimpleSqlCreater.Select<User>()

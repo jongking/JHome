@@ -11,7 +11,7 @@ namespace Domain.IRepository
         void Add(User user);
         void Update(User user);
         void Remove(User user);
-        User GetById(Guid productId);
+        User GetById(int productId);
         User GetByUserName(string name);
         ICollection<User> GetByPassWord(string category);
     }

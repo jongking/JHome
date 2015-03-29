@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Application.Dto;
 using Application.IApplication;
 using Domain.Model;
 
@@ -19,6 +20,11 @@ namespace Application.ApplicationImpl
         {
             var user = new User(userName, passWord);
             return user.Login();
+        }
+
+        public UserDto Get(string userName)
+        {
+            return new UserDto(User.UserRepository.GetByUserName(userName));
         }
     }
 }

@@ -92,7 +92,7 @@ J.GetJSONSync("../api/user.aspx", "Check", {}, function (msg) {
 //JHome中单独使用的函数
 J.JHome = {
     LogOut:function() {
-        document.cookie = "J_UserName=1; path=/";
+        document.cookie = "J_UserName=; path=/";
 //        document.cookie = "J_Key=1; path=/";
     }
 }

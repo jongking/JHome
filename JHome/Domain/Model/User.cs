@@ -9,6 +9,8 @@ namespace Domain.Model
     [Serializable]
     public class User
     {
+        public readonly static IUserRepository UserRepository = RepositoryFactory.CreateInstance<IUserRepository>("User");
+
         public int Id { get; set; }
         public string UserName { get; set; }
         public string PassWord { get; set; }
@@ -17,12 +19,10 @@ namespace Domain.Model
         {
         }
 
-        private readonly IUserRepository _userRepository = RepositoryFactory.CreateInstance<IUserRepository>("User");
         public User(string userName, string passWord)
         {
             UserName = userName;
             PassWord = passWord;
-            Check();
         }
 
         public bool Reg()
@@ -31,15 +31,14 @@ namespace Domain.Model
 
             CheckUserRepeat(UserName);
 
-            _userRepository.Add(this);
+            UserRepository.Add(this);
 
             return true;
         }
 
         private void CheckUserRepeat(string userName)
         {
-            var nowUsers = _userRepository.GetByUserName(userName);
-            if (nowUsers.Id != 0)
+            if (HasUser(userName))
             {
                 throw new JException("会员名称重复", ExceptionType.领域模型自检);
             }
@@ -64,9 +63,20 @@ namespace Domain.Model
         {
             Check();
 
-            var user = _userRepository.GetByUserName(UserName);
+            var user = UserRepository.GetByUserName(UserName);
 
             return user.Id != 0 && user.PassWord == PassWord;
+        }
+
+        public static bool HasUser(int userId)
+        {
+            var user = UserRepository.GetById(userId);
+            return user != null && user.Id > 0;
+        }
+        public static bool HasUser(string userName)
+        {
+            var user = UserRepository.GetByUserName(userName);
+            return user != null && user.Id > 0;
         }
     }
 }

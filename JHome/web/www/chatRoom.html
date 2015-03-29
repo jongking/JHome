@@ -33,10 +33,13 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
+            J.GetJSON("../api/ChatMessage.aspx", "GetMsg", {}, function (msg) {
+                alert(msg.length);
+            });
             $("#SendBtn").bind("click", function () {
                 if ($(".SendFrom").valid()) {
-                    J.GetJSON("../api/ChatMessage.aspx", "SendMsg", { SendInput: $("#SendInput").val() }, function() {
-
+                    J.GetJSON("../api/ChatMessage.aspx", "SendBroadcast", { Message: $("#SendInput").val() }, function () {
+                        J.alert("发送成功");
                     });
                 }
             });
@@ -51,10 +54,5 @@
             <button class="btn btn-primary" type="button" id="SendBtn">Enter</button>
         </span>
     </form>
-<!--<div class="container-fluid navbar navbar-inverse ">-->
-<!-- <div class="navbar-form">-->
-<!-- -->
-<!-- </div>-->
-<!--</div>-->
 </body>
 </html>
