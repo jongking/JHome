@@ -14,7 +14,12 @@ J.GetJSON = function (url, action, data, successFun, errorFun) {
         async: true,
         success: function(msg) {
             if (msg.Code == 0) {
-                var result = $.parseJSON(msg.Date);
+                var result;
+                if (msg.Date == "") {
+                    result = "";
+                } else {
+                    result = $.parseJSON(msg.Date);
+                }
                 successFun(result);
             } else {
                 if (errorFun != undefined) {
@@ -43,7 +48,12 @@ J.GetJSONSync = function (url, action, data, successFun, errorFun) {
         async: false,
         success: function (msg) {
             if (msg.Code == 0) {
-                result = $.parseJSON(msg.Date);
+                var result;
+                if (msg.Date == "") {
+                    result = "";
+                } else {
+                    result = $.parseJSON(msg.Date);
+                }
                 if (successFun != undefined) {
                     successFun(result);
                 }
@@ -73,7 +83,12 @@ J.GetJSONByForm = function (url, action, selecter, successFun, errorFun) {
         dataType: "json",
         success: function (msg) {
             if (msg.Code == 0) {
-                var result = $.parseJSON(msg.Date);
+                var result;
+                if (msg.Date == "") {
+                    result = "";
+                } else {
+                    result = $.parseJSON(msg.Date);
+                }
                 if (successFun != undefined) {
                     successFun(result);
                 }

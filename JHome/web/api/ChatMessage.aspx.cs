@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Application.Dto;
 using Application.IApplication;
 using Factory;
 using JHelper;
@@ -31,7 +32,13 @@ public partial class api_ChatMessage : GloPage
 
     public void GetMsg()
     {
-        var userName = Helper.GetLoginUser(Page).UserName;
+        var user = Helper.GetLoginUser(Page);
+        if (user == null) {
+            JsonResult.SetDateByClass(new List<ChatMessageDto>());
+            return;
+        }
+
+        var userName = user.UserName;
 
         var msgs = _chatMessageApplication.GetMyChatMessages(userName);
 

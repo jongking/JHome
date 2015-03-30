@@ -25,20 +25,24 @@
     <style>
         .SendFrom {
             background-color: #000000;
-            width: 100%;
+            bottom: 0;
             padding: 3px;
             position: fixed;
-            bottom: 0;
+            width: 100%;
         }
     </style>
     <script type="text/javascript">
-        $(document).ready(function () {
-            J.GetJSON("../api/ChatMessage.aspx", "GetMsg", {}, function (msg) {
-                alert(msg.length);
+        $(document).ready(function() {
+            J.GetJSON("../api/ChatMessage.aspx", "GetMsg", {}, function(msg) {
+                var $msgList = $("#MsgList");
+                $.each(msg, function(i, v) {
+                    $msgList.append("<li class=\"list-group-item\"><h4 class=\"list-group-item-heading\">" + this.FromUserId + "  " + this.HappenDate +
+                        "</h4><p class=\"list-group-item-text\">" + this.MsgContent + "</p></li>");
+                });
             });
-            $("#SendBtn").bind("click", function () {
+            $("#SendBtn").bind("click", function() {
                 if ($(".SendFrom").valid()) {
-                    J.GetJSON("../api/ChatMessage.aspx", "SendBroadcast", { Message: $("#SendInput").val() }, function () {
+                    J.GetJSON("../api/ChatMessage.aspx", "SendBroadcast", { Message: $("#SendInput").val() }, function() {
                         J.alert("发送成功");
                     });
                 }
@@ -48,11 +52,18 @@
 </head>
 <body>
 <script src="../resource/js/Layout/Header.js" type="text/javascript"></script>
-    <form class="input-group input-group-lg SendFrom">
-        <input id="SendInput" name="SendInput" class="form-control" type="text" placeholder="Please enter" validate="{required:true}" />
-        <span class="input-group-btn">
+<div style="bottom: 40px; left: 0; overflow: auto; position: absolute; right: 0; top: 60px;">
+    <div class="container-fluid">
+        <ul class="list-group" id="MsgList">
+
+        </ul>
+    </div>
+</div>
+<form class="input-group input-group-lg SendFrom">
+    <input id="SendInput" name="SendInput" class="form-control" type="text" placeholder="Please enter" validate="{required:true}"/>
+    <span class="input-group-btn">
             <button class="btn btn-primary" type="button" id="SendBtn">Enter</button>
         </span>
-    </form>
+</form>
 </body>
 </html>

@@ -44,7 +44,7 @@ public static class Helper
     /// <returns></returns>
     public static UserDto GetLoginUser(Page page)
     {
-        if (page.Request.Cookies["J_UserName"] == null || page.Request.Cookies["J_Key"] == null)
+        if (!CheckAuthen(page))
         {
             return null;
         }
