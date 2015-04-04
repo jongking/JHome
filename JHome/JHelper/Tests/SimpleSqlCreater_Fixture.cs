@@ -16,7 +16,9 @@ namespace JHelper.Tests
         {
             DbHelper.IsDebug = true;
         }
+
         [SetUp]
+        [TearDown]
         public void ClearNUnit()
         {
             DbHelper.ExecuteNonQuery("DELETE FROM NUnitT WHERE 1=1");
@@ -119,9 +121,5 @@ namespace JHelper.Tests
             DbHelper.IsDebug = false;
         }
 
-        public class NUnit
-        {
-            public string No { get; set; }
-        }
     }
 }

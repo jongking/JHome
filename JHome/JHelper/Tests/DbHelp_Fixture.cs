@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Transactions;
-using JHelper.DB;
+﻿using JHelper.DB;
 using NUnit.Framework;
 
 namespace JHelper.Tests
 {
     [TestFixture]
-    class DbHelp_Fixture
+    internal class DbHelp_Fixture
     {
         [TestFixtureSetUp]
         public void SetDebug()
         {
             DbHelper.IsDebug = true;
         }
+
         [SetUp]
         public void ClearNUnit()
         {
-            DbHelper.ExecuteNonQuery("DELETE FROM NUnitT WHERE 1=1");
+            DbHelper.ExecuteNonQuery("DELETE FROM Test WHERE 1=1");
         }
 
         [Test]
@@ -36,22 +32,23 @@ namespace JHelper.Tests
         {
             using (var scope = DbHelper.GetTransactionScope())
             {
-                DbHelper.ExecuteNonQuery("INSERT INTO NUnitT (No) VALUES ('1')");
-                DbHelper.ExecuteNonQuery("INSERT INTO NUnitT (No) VALUES ('2')");
+                DbHelper.ExecuteNonQuery("INSERT INTO Test (No) VALUES ('1')");
+                DbHelper.ExecuteNonQuery("INSERT INTO Test (No) VALUES ('2')");
                 scope.Complete();
             }
-            var dt = DbHelper.ExecuteDataTable("SELECT * FROM NUnitT");
+            var dt = DbHelper.ExecuteDataTable("SELECT * FROM Test");
             Assert.AreEqual(dt.Rows.Count, 2);
         }
+
         [Test]
         public void Can_TransactionScope_Not_Complete()
         {
             using (var scope = DbHelper.GetTransactionScope())
             {
-                DbHelper.ExecuteNonQuery("INSERT INTO NUnitT (No) VALUES ('1')");
-                DbHelper.ExecuteNonQuery("INSERT INTO NUnitT (No) VALUES ('2')");
+                DbHelper.ExecuteNonQuery("INSERT INTO Test (No) VALUES ('1')");
+                DbHelper.ExecuteNonQuery("INSERT INTO Test (No) VALUES ('2')");
             }
-            var dt = DbHelper.ExecuteDataTable("SELECT * FROM NUnitT");
+            var dt = DbHelper.ExecuteDataTable("SELECT * FROM Test");
             Assert.AreEqual(dt.Rows.Count, 0);
         }
 

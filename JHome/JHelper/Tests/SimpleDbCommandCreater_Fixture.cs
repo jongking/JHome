@@ -15,7 +15,9 @@ namespace JHelper.Tests
         {
             DbHelper.IsDebug = true;
         }
+
         [SetUp]
+        [TearDown]
         public void ClearNUnit()
         {
             DbHelper.ExecuteNonQuery("DELETE FROM NUnitT WHERE 1=1");
@@ -46,8 +48,8 @@ namespace JHelper.Tests
             Can_Insert();
 
             var ssc = SimpleDbCommandCreater.Update("NUnitT");
+            ssc.Eq("No", "2", "No2");
             ssc.AddParam("No", "1");
-            ssc.Eq("No", "2");
 
             var effectRow = DbHelper.ExecuteNonQuery(ssc.ToDbCommand());
 
@@ -63,7 +65,6 @@ namespace JHelper.Tests
             ssc.Eq("No", "2");
 
             var effectRow = DbHelper.ExecuteNonQuery(ssc.ToDbCommand());
-            DbHelper.GetDatabase().ExecuteSqlStringAccessor<NUnit>("");
             Assert.AreEqual(effectRow, 1);
         }
 
@@ -71,11 +72,6 @@ namespace JHelper.Tests
         public void UnSetDebug()
         {
             DbHelper.IsDebug = false;
-        }
-
-        public class NUnit
-        {
-            public string No { get; set; }
         }
     }
 }
