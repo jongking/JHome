@@ -12,6 +12,8 @@ namespace JHelper.DB
         private string _where;
         private readonly OperatorType _operatorType;
         private string _linker;
+        private string _orderby;
+        private int _limit;
         private Dictionary<string, string> _kyDictionary = new Dictionary<string, string>(); 
 
         private SimpleSqlCreater(string table, OperatorType operatorType)
@@ -19,6 +21,8 @@ namespace JHelper.DB
             _table = table;
             _operatorType = operatorType;
             _where = "";
+            _limit = 0;
+            _orderby = "";
             _linker = " AND ";
         }
 
@@ -124,6 +128,18 @@ namespace JHelper.DB
             _linker = " OR ";
             return this;
         }
+
+        public SimpleSqlCreater Limit(int num)
+        {
+            _limit = num;
+            return this;
+        }
+        public SimpleSqlCreater OrderBy(string fildName, OrderByType orderBy)
+        {
+            _orderby = string.Format(orderBy == OrderByType.Asc ? " {0} ASC " : " {0} DESC ", fildName);
+            return this;
+        }
+
         public SimpleSqlCreater AddParam(string filedName, string param)
         {
             _kyDictionary.Add(filedName, param);
@@ -133,7 +149,17 @@ namespace JHelper.DB
         {
             if (_operatorType == OperatorType.Select)
             {
-                return string.Format("SELECT * FROM {0} WHERE 1=1 {1}", _table, _where);
+                string limit = "";
+                string orderby = "";
+                if (_limit != 0)
+                {
+                    limit = string.Format(" TOP {0}", _limit);
+                }
+                if (_orderby != "")
+                {
+                    orderby = string.Format(" ORDER BY {0} ", _orderby);
+                }
+                return string.Format("SELECT {2} * FROM {0} WHERE 1=1 {1} {3}", _table, _where, limit, orderby);
             }
             if (_operatorType == OperatorType.Insert)
             {
@@ -173,6 +199,12 @@ namespace JHelper.DB
             Insert,
             Update,
             Delete
+        }
+
+        public enum OrderByType
+        {
+            Desc,
+            Asc
         }
     }
 }

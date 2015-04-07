@@ -32,25 +32,51 @@
         }
     </style>
     <script type="text/javascript">
-        $(document).ready(function() {
-            J.GetJSON("../api/ChatMessage.aspx", "GetMsg", {}, function(msg) {
-                var $msgList = $("#MsgList");
-                $.each(msg, function(i, v) {
-                    $msgList.append("<li class=\"list-group-item\"><h4 class=\"list-group-item-heading\">" + this.FromUserId + "  " + this.HappenDate +
-                        "</h4><p class=\"list-group-item-text\">" + this.MsgContent + "</p></li>");
-                });
-            });
+        $(document).ready(function () {
+            GetMsg();
             $("#SendBtn").bind("click", function() {
                 if ($(".SendFrom").valid()) {
-                    J.GetJSON("../api/ChatMessage.aspx", "SendBroadcast", { Message: $("#SendInput").val() }, function() {
-                        J.alert("发送成功");
+                    J.GetJSON("../api/ChatMessage.aspx", "SendBroadcast", { Message: $("#SendInput").val() }, function () {
+                        GetMsg();
+                        //var msg = { FromUserName: "", MsgContent: $("#SendInput").val() }
+                        //AppendMsgToMsgList(msg);
                     });
                 }
             });
+//            setInterval(GetMsg, 3000);
         });
+        //设置键盘事件
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                $("#SendBtn").trigger("click");
+                return false;
+            }
+            console.log(event.keyCode);
+        });
+        function GetMsg() {
+            J.GetJSON("../api/ChatMessage.aspx", "GetMsg", { LastMsgId: $("#LastMsgId").val() }, function (msg) {
+                var $msgList = $("#MsgList");
+                if (msg.LastId != -1) {
+                    $.each(msg.CmList, function (i, v) {
+                        AppendMsg(this, $msgList);
+                    });
+                    $("#LastMsgId").val(msg.LastId);
+                }
+            });
+        }
+        function AppendMsg(msg, $msgList) {
+            $msgList.append("<li class=\"list-group-item\"><h5 class=\"list-group-item-heading text-right\">" + msg.FromUserName + "</h5><p class=\"list-group-item-text\">" + msg.MsgContent + "</p></li>");
+        }
+        function AppendMsgToMsgList(msg) {
+            var $msgList = $("#MsgList");
+            AppendMsg(msg, $msgList);
+        }
     </script>
 </head>
 <body>
+<div style="display: none;">
+    <input type="hidden" id="LastMsgId" value="0"/>
+</div>
 <script src="../resource/js/Layout/Header.js" type="text/javascript"></script>
 <div style="bottom: 40px; left: 0; overflow: auto; position: absolute; right: 0; top: 60px;">
     <div class="container-fluid">
@@ -61,9 +87,7 @@
 </div>
 <form class="input-group input-group-lg SendFrom">
     <input id="SendInput" name="SendInput" class="form-control" type="text" placeholder="Please enter" validate="{required:true}"/>
-    <span class="input-group-btn">
-            <button class="btn btn-primary" type="button" id="SendBtn">Enter</button>
-        </span>
+    <span class="input-group-btn"><button class="btn btn-primary" type="button" id="SendBtn">Enter</button></span>
 </form>
 </body>
 </html>

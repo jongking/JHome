@@ -15,7 +15,14 @@ public partial class api_ChatMessage : GloPage
 
     public void Send()
     {
-        var fromUserName = Helper.GetLoginUser(Page).UserName;
+        var user = Helper.GetLoginUser(Page);
+        if (user == null)
+        {
+            JsonResult.Error("请先登录");
+            return;
+        }
+
+        var fromUserName = user.UserName;
         var toUserName = WebHelper.Request("UserName", Page);
         var message = WebHelper.Request("Message", Page);
 
@@ -24,7 +31,14 @@ public partial class api_ChatMessage : GloPage
 
     public void SendBroadcast()
     {
-        var userName = Helper.GetLoginUser(Page).UserName;
+        var user = Helper.GetLoginUser(Page);
+        if (user == null)
+        {
+            JsonResult.Error("请先登录");
+            return;
+        }
+
+        var userName = user.UserName;
         var message = WebHelper.Request("Message", Page);
 
         _chatMessageApplication.SendBroadcast(userName, message);
@@ -37,11 +51,32 @@ public partial class api_ChatMessage : GloPage
             JsonResult.SetDateByClass(new List<ChatMessageDto>());
             return;
         }
-
         var userName = user.UserName;
 
-        var msgs = _chatMessageApplication.GetMyChatMessages(userName);
+        var clientLastMsgId = Convert.ToInt32(WebHelper.Request("LastMsgId", Page));
 
-        JsonResult.SetDateByClass(msgs);
+        var serverLastMsgId = _chatMessageApplication.GetLastId(userName);
+
+        if (serverLastMsgId > clientLastMsgId)
+        {
+            var msgs = _chatMessageApplication.GetMyChatMessages(userName, clientLastMsgId);
+
+            var msgwrap = new MessageWrap()
+            {
+                CmList = msgs,
+                LastId = serverLastMsgId
+            };
+            JsonResult.SetDateByClass(msgwrap);
+        }
+        else
+        {
+            JsonResult.SetDateByClass(new List<ChatMessageDto>());
+        }
+    }
+
+    private class MessageWrap
+    {
+        public IList<ChatMessageDto> CmList;
+        public int LastId = -1;
     }
 }

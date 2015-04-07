@@ -20,6 +20,7 @@ namespace JHelper
         public static string JsonSerialize(object obj)
         {
             var jss = new JavaScriptSerializer();
+            jss.MaxJsonLength = Int32.MaxValue;
             string jsonStr = jss.Serialize(obj);
             return jsonStr;
         }

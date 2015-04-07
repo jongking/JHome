@@ -11,5 +11,7 @@ namespace Application.IApplication
         bool Send(string from, string to, string msg);
         bool SendBroadcast(string from, string msg);
         IList<ChatMessageDto> GetMyChatMessages(string userName);
+        IList<ChatMessageDto> GetMyChatMessages(string userName, int clientLastId);
+        int GetLastId(string userName);
     }
 }

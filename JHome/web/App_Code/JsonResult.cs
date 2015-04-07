@@ -45,7 +45,7 @@ public class JsonResult
     public void Error(string errMsg)
     {
         Code = ResultCode.错误;
-        ErrorReson = string.Format("发生了错误,错误信息为{0}", errMsg);
+        ErrorReson = errMsg;
     }
 }
 

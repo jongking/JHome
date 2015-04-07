@@ -35,15 +35,17 @@ namespace Application.ApplicationImpl
 
         public IList<ChatMessageDto> GetMyChatMessages(string userName)
         {
-            var broadcastMsgs = ChatMessage.ChatMessageRepository.GetByBroadcast(true);
+            return ChatMessageDto.GetMyChatMessages(userName);
+        }
 
-            var cmDtoList = new List<ChatMessageDto>();
-            foreach (var broadcastMsg in broadcastMsgs)
-            {
-                cmDtoList.Add(new ChatMessageDto(broadcastMsg));
-            }
+        public IList<ChatMessageDto> GetMyChatMessages(string userName, int clid)
+        {
+            return ChatMessageDto.GetMyChatMessages(userName, clid);
+        }
 
-            return cmDtoList;
+        public int GetLastId(string userName)
+        {
+            return ChatMessageDto.GetLastId(userName);
         }
     }
 }

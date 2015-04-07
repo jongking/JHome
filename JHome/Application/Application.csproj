@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ApplicationImpl\ChatMessageApplication.cs" />
     <Compile Include="ApplicationImpl\UserApplication.cs" />
+    <Compile Include="Dto\BaseDto.cs" />
     <Compile Include="Dto\ChatMessageDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="IApplication\IChatMessageApplication.cs" />
@@ -52,6 +53,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{AE3DE55F-8B5D-4208-AE9A-A01824D5B2DF}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Factory\Factory.csproj">
+      <Project>{5DC7428C-E268-444D-A4D6-B2648F572EF2}</Project>
+      <Name>Factory</Name>
     </ProjectReference>
     <ProjectReference Include="..\JHelper\JHelper.csproj">
       <Project>{79c77b98-d95c-4c69-b594-aefeeb9fe6fe}</Project>
