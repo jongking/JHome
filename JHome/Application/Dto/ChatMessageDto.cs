@@ -53,11 +53,15 @@ namespace Application.Dto
         {
             SimpleSqlCreater ssc = SimpleSqlCreater
                 .Select<ChatMessageDto>()
+                .Combine(
+                SimpleSqlCreater
+                .Where()
                 .Eq("FromUserName", userName)
                 .Or()
                 .Eq("ToUserName", userName)
                 .Or()
                 .Eq("IsBroadcast", "1")
+                )
                 .And()
                 .Big("Id", clientLastId.ToString());
             return BaseDto.DtoRepository.GetList<ChatMessageDto>(ssc.ToString());

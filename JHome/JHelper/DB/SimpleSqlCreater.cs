@@ -42,6 +42,10 @@ namespace JHelper.DB
         {
             return new SimpleSqlCreater(table, OperatorType.Delete);
         }
+        public static SimpleSqlCreater Where()
+        {
+            return new SimpleSqlCreater("", OperatorType.Where);
+        }
         public static SimpleSqlCreater Select<T>()
         {
             var table = DbHelper.GetTableFromClass<T>();
@@ -125,7 +129,7 @@ namespace JHelper.DB
         }
         public SimpleSqlCreater Or()
         {
-            _linker = " OR ";
+            _linker = " OR  ";
             return this;
         }
 
@@ -134,6 +138,7 @@ namespace JHelper.DB
             _limit = num;
             return this;
         }
+
         public SimpleSqlCreater OrderBy(string fildName, OrderByType orderBy)
         {
             _orderby = string.Format(orderBy == OrderByType.Asc ? " {0} ASC " : " {0} DESC ", fildName);
@@ -145,6 +150,13 @@ namespace JHelper.DB
             _kyDictionary.Add(filedName, param);
             return this;
         }
+
+        public SimpleSqlCreater Combine(SimpleSqlCreater ssc)
+        {
+            _where += _linker + ssc;
+            return this;
+        }
+
         public override string ToString()
         {
             if (_operatorType == OperatorType.Select)
@@ -190,6 +202,10 @@ namespace JHelper.DB
             {
                 return string.Format("DELETE FROM {0} WHERE 1=1 {1}", _table, _where);
             }
+            if (_operatorType == OperatorType.Where)
+            {
+                return "(" + _where.Substring(5) + ")";
+            }
             return "ERROR";
         }
 
@@ -198,7 +214,8 @@ namespace JHelper.DB
             Select,
             Insert,
             Update,
-            Delete
+            Delete,
+            Where
         }
 
         public enum OrderByType
