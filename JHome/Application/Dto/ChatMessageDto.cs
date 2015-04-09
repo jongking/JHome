@@ -37,19 +37,7 @@ namespace Application.Dto
             ToUserName = UserDto.GetById(ToUserId).UserName;
         }
 
-        internal static IList<ChatMessageDto> GetMyChatMessages(string userName)
-        {
-            SimpleSqlCreater ssc = SimpleSqlCreater
-                .Select<ChatMessageDto>()
-                .Eq("FromUserName", userName)
-                .Or()
-                .Eq("ToUserName", userName)
-                .Or()
-                .Eq("IsBroadcast", "1");
-            return BaseDto.DtoRepository.GetList<ChatMessageDto>(ssc.ToString());
-        }
-
-        internal static IList<ChatMessageDto> GetMyChatMessages(string userName, int clientLastId)
+        internal static IList<ChatMessageDto> GetMyChatMessages(string userName, int clientDnId = -1, int clientUpId = -1, int limit = 0)
         {
             SimpleSqlCreater ssc = SimpleSqlCreater
                 .Select<ChatMessageDto>()
@@ -62,8 +50,16 @@ namespace Application.Dto
                 .Or()
                 .Eq("IsBroadcast", "1")
                 )
-                .And()
-                .Big("Id", clientLastId.ToString());
+                .Limit(limit)
+                .OrderBy("Id", SimpleSqlCreater.OrderByType.Desc);
+            if (clientUpId >= 0)
+            {
+                ssc.Big("Id", clientUpId.ToString());
+            }
+            if (clientDnId >= 0)
+            {
+                ssc.Sml("Id", clientDnId.ToString());
+            }
             return BaseDto.DtoRepository.GetList<ChatMessageDto>(ssc.ToString());
         }
 

@@ -1,5 +1,5 @@
 ﻿var J = {};
-J.GetJSON = function (url, action, data, successFun, errorFun) {
+J.GetJSON = function (url, action, data, successFun, errorFun, completeFun) {
     if (action == undefined || action == "") {
         J.error("error:no action");
         return;
@@ -28,11 +28,12 @@ J.GetJSON = function (url, action, data, successFun, errorFun) {
                     J.error(msg.ErrorReson);
                 }
             }
-        }
+        },
+        complete:completeFun
     });
 }
 
-J.GetJSONSync = function (url, action, data, successFun, errorFun) {
+J.GetJSONSync = function (url, action, data, successFun, errorFun, completeFun) {
     if (action == undefined || action == "") {
         J.error("error:no action");
         return undefined;
@@ -65,12 +66,13 @@ J.GetJSONSync = function (url, action, data, successFun, errorFun) {
                 }
                 result = undefined;
             }
-        }
+        },
+        complete:completeFun
     });
     return result;
 }
 
-J.GetJSONByForm = function (url, action, selecter, successFun, errorFun) {
+J.GetJSONByForm = function (url, action, selecter, successFun, errorFun, completeFun) {
     if (action == undefined || action == "") {
         J.error("error:no action");
         return undefined;
@@ -99,6 +101,7 @@ J.GetJSONByForm = function (url, action, selecter, successFun, errorFun) {
                     J.error(msg.ErrorReson);
                 }
             }
-        }
+        },
+        complete:completeFun
     });
 }

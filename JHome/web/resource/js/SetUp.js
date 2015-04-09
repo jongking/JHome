@@ -93,6 +93,12 @@ J.GetJSONSync("../api/user.aspx", "Check", {}, function (msg) {
 J.JHome = {
     LogOut:function() {
         document.cookie = "J_UserName=; path=/";
-//        document.cookie = "J_Key=1; path=/";
+    },
+    IsLog:function() {
+        if (J.User != undefined) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

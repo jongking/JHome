@@ -10,8 +10,8 @@ namespace Application.IApplication
     {
         bool Send(string from, string to, string msg);
         bool SendBroadcast(string from, string msg);
-        IList<ChatMessageDto> GetMyChatMessages(string userName);
-        IList<ChatMessageDto> GetMyChatMessages(string userName, int clientLastId);
+        IList<ChatMessageDto> GetLastMyChatMessages(string userName, int clientUpId = -1, int limit = 0);
+        IList<ChatMessageDto> GetMidMyChatMessages(string userName, int clientDnId = -1, int limit = 0);
         int GetLastId(string userName);
     }
 }

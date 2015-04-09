@@ -59,18 +59,48 @@ public partial class api_ChatMessage : GloPage
 
         if (serverLastMsgId > clientLastMsgId)
         {
-            var msgs = _chatMessageApplication.GetMyChatMessages(userName, clientLastMsgId);
-
+            var msgs = _chatMessageApplication.GetLastMyChatMessages(userName, clientLastMsgId, 20);
+            
             var msgwrap = new MessageWrap()
             {
-                CmList = msgs,
-                LastId = serverLastMsgId
+                CmList = msgs.Reverse().ToList(),
+                LastId = serverLastMsgId,
+                StartId = msgs.Last().Id
             };
             JsonResult.SetDateByClass(msgwrap);
         }
         else
         {
+            JsonResult.SetDateByClass(new MessageWrap());
+        }
+    }
+
+    public void GetOldMsg()
+    {
+        var user = Helper.GetLoginUser(Page);
+        if (user == null)
+        {
             JsonResult.SetDateByClass(new List<ChatMessageDto>());
+            return;
+        }
+        var userName = user.UserName;
+
+        var clientStartMsgId = Convert.ToInt32(WebHelper.Request("StartMsgId", Page));
+
+        var msgs = _chatMessageApplication.GetMidMyChatMessages(userName, clientStartMsgId, 20);
+
+        if (msgs.Count != 0)
+        {
+            var msgwrap = new MessageWrap()
+            {
+                CmList = msgs.Reverse().ToList(),
+                StartId = msgs.Last().Id
+            };
+            JsonResult.SetDateByClass(msgwrap);
+        }
+        else
+        {
+            JsonResult.SetDateByClass(new MessageWrap());
         }
     }
 
@@ -78,5 +108,6 @@ public partial class api_ChatMessage : GloPage
     {
         public IList<ChatMessageDto> CmList;
         public int LastId = -1;
+        public int StartId = -1;
     }
 }

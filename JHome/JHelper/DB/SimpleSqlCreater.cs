@@ -163,7 +163,7 @@ namespace JHelper.DB
             {
                 string limit = "";
                 string orderby = "";
-                if (_limit != 0)
+                if (_limit > 0)
                 {
                     limit = string.Format(" TOP {0}", _limit);
                 }

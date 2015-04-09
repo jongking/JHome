@@ -34,6 +34,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#LastMsgId").val("0");
+            $("#StartMsgId").val("0");
             GetMsg();
             $("#SendBtn").bind("click", function() {
                 if ($(".SendFrom").valid()) {
@@ -43,7 +44,11 @@
                     });
                 }
             });
-            setInterval(GetMsg, 500);
+            if (J.JHome.IsLog()) {
+                $("#btnGetOldMsg").show();
+            }
+            $("#btnGetOldMsg").bind("click", GetOldMsg);
+            setTimeout(GetMsg, 500);
         });
         //设置键盘事件
         $(document).keydown(function(event) {
@@ -61,24 +66,50 @@
                     $.each(msg.CmList, function(i, v) {
                         AppendMsg(this, $msgList);
                     });
+                    if ($("#StartMsgId").val() == "0") {
+                        $("#StartMsgId").val(msg.StartId);
+                    }
                     $("#LastMsgId").val(msg.LastId);
                     $("#MsgDiv").scrollTop(100000);
                 }
+            }
+            , undefined
+            , function () {
+                setTimeout(GetMsg, 500);
             });
         }
 
+        function GetOldMsg() {
+            J.GetJSON("../api/ChatMessage.aspx", "GetOldMsg", { StartMsgId: $("#StartMsgId").val() }, function (msg) {
+                var $msgList = $("#MsgList");
+                if (msg.StartId != -1) {
+                    $.each(msg.CmList, function (i, v) {
+                        PrependMsg(this, $msgList);
+                    });
+                    $("#StartMsgId").val(msg.StartId);
+                } else {
+                    $("#btnGetOldMsg").hide();
+//                    $("#btnGetOldMsg").attr("disabled", "disabled");
+                }
+            });
+        }
         function AppendMsg(msg, $msgList) {
-            $msgList.append("<li class=\"list-group-item\"><h5 class=\"list-group-item-heading text-right\">" + msg.FromUserName + "</h5><p class=\"list-group-item-text\">" + msg.MsgContent + "</p></li>");
+            $msgList.append("<li class=\"list-group-item\"><h6 class=\"list-group-item-heading\">&nbsp;<div style='float:left;'>" + msg.FromUserName + ":</div><div style='float:right;'>" + msg.HappenDateStr + "</div></h6><p class=\"list-group-item-text\">" + msg.MsgContent + "</p></li>");
+        }
+        function PrependMsg(msg, $msgList) {
+            $msgList.prepend("<li class=\"list-group-item\"><h6 class=\"list-group-item-heading\">&nbsp;<div style='float:left;'>" + msg.FromUserName + ":</div><div style='float:right;'>" + msg.HappenDateStr + "</div></h6><p class=\"list-group-item-text\">" + msg.MsgContent + "</p></li>");
         }
     </script>
 </head>
 <body>
 <div style="display: none;">
+    <input type="hidden" id="StartMsgId" value="0"/>
     <input type="hidden" id="LastMsgId" value="0"/>
 </div>
 <script src="../resource/js/Layout/Header.js" type="text/javascript"></script>
 <div id="MsgDiv" style="bottom: 40px; left: 0; overflow: auto; position: absolute; right: 0; top: 60px;">
     <div class="container-fluid">
+        <button id="btnGetOldMsg" type="button" style="display: none;" class="btn btn-default btn-xs btn-block"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
         <ul class="list-group" id="MsgList"></ul>
     </div>
 </div>

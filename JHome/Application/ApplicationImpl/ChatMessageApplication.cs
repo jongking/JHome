@@ -33,14 +33,14 @@ namespace Application.ApplicationImpl
             return true;
         }
 
-        public IList<ChatMessageDto> GetMyChatMessages(string userName)
+        public IList<ChatMessageDto> GetLastMyChatMessages(string userName, int clientUpId = -1, int limit = 0)
         {
-            return ChatMessageDto.GetMyChatMessages(userName);
+            return ChatMessageDto.GetMyChatMessages(userName, -1, clientUpId, limit);
         }
 
-        public IList<ChatMessageDto> GetMyChatMessages(string userName, int clid)
+        public IList<ChatMessageDto> GetMidMyChatMessages(string userName, int clientDnId = -1, int limit = 0)
         {
-            return ChatMessageDto.GetMyChatMessages(userName, clid);
+            return ChatMessageDto.GetMyChatMessages(userName, clientDnId, -1, limit);
         }
 
         public int GetLastId(string userName)

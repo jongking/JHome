@@ -12,7 +12,7 @@ var header = '<nav class="navbar navbar-inverse navbar-fixed-top"><div class="co
 document.write(header);
 
 $(document).ready(function () {
-    if (J.User == undefined) {
+    if (!J.JHome.IsLog()) {
         $("#LoginShowMenu").hide();
     } else {
         $("#RegForm").hide();
