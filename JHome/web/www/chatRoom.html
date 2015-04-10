@@ -20,6 +20,7 @@
     <script src="../resource/js/jquery.validate.js" type="text/javascript"></script>
     <script src="../resource/js/jquery.form.js" type="text/javascript"></script>
     <script src="../resource/js/Helper.js" type="text/javascript"></script>
+    <script src="../resource/js/JHome.js" type="text/javascript"></script>
     <script src="../resource/js/SetUp.js" type="text/javascript"></script>
     <title>J</title>
     <style>
@@ -38,7 +39,7 @@
             GetMsg();
             $("#SendBtn").bind("click", function() {
                 if ($(".SendFrom").valid()) {
-                    J.GetJSON("../api/ChatMessage.aspx", "SendBroadcast", { Message: $("#SendInput").val() }, function () {
+                    J.GetJSON(J.JHome.RootPath + "api/ChatMessage.aspx", "SendBroadcast", { Message: $("#SendInput").val() }, function () {
                         $("#SendInput").val("");
                         GetMsg();
                     });
@@ -47,6 +48,7 @@
             if (J.JHome.IsLog()) {
                 $("#btnGetOldMsg").show();
             }
+
             $("#btnGetOldMsg").bind("click", GetOldMsg);
             setTimeout(GetMsg, 500);
         });
@@ -60,7 +62,7 @@
         });
 
         function GetMsg() {
-            J.GetJSON("../api/ChatMessage.aspx", "GetMsg", { LastMsgId: $("#LastMsgId").val() }, function(msg) {
+            J.GetJSON(J.JHome.RootPath + "api/ChatMessage.aspx", "GetMsg", { LastMsgId: $("#LastMsgId").val() }, function (msg) {
                 var $msgList = $("#MsgList");
                 if (msg.LastId != -1) {
                     $.each(msg.CmList, function(i, v) {
@@ -80,7 +82,7 @@
         }
 
         function GetOldMsg() {
-            J.GetJSON("../api/ChatMessage.aspx", "GetOldMsg", { StartMsgId: $("#StartMsgId").val() }, function (msg) {
+            J.GetJSON(J.JHome.RootPath + "api/ChatMessage.aspx", "GetOldMsg", { StartMsgId: $("#StartMsgId").val() }, function (msg) {
                 var $msgList = $("#MsgList");
                 if (msg.StartId != -1) {
                     $.each(msg.CmList, function (i, v) {
@@ -89,7 +91,6 @@
                     $("#StartMsgId").val(msg.StartId);
                 } else {
                     $("#btnGetOldMsg").hide();
-//                    $("#btnGetOldMsg").attr("disabled", "disabled");
                 }
             });
         }

@@ -42,8 +42,12 @@
     <Compile Include="Exception\JException.cs" />
     <Compile Include="IRepository\IChatMessageRepository.cs" />
     <Compile Include="IRepository\IDtoRepository.cs" />
+    <Compile Include="IRepository\IRoleRepository.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="Model\ChatMessage.cs" />
+    <Compile Include="Model\Role\Power.cs" />
+    <Compile Include="Model\Role\Role.cs" />
+    <Compile Include="Model\Role\RolePower.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

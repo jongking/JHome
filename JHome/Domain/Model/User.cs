@@ -14,6 +14,7 @@ namespace Domain.Model
         public int Id { get; set; }
         public string UserName { get; set; }
         public string PassWord { get; set; }
+        public int RoleId { get; set; }
 
         public User()
         {
@@ -34,6 +35,26 @@ namespace Domain.Model
             UserRepository.Add(this);
 
             return true;
+        }
+
+        public bool CheckPower(int powerId)
+        {
+            var role = new Role.Role()
+            {
+                Id = RoleId
+            };
+
+            return role.CheckPower(powerId);
+        }
+
+        public static bool CheckPower(int powerId, int roleId)
+        {
+            var role = new Role.Role()
+            {
+                Id = roleId
+            };
+
+            return role.CheckPower(powerId);
         }
 
         private void CheckUserRepeat(string userName)

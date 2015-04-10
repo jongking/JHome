@@ -83,22 +83,8 @@ J.alert = function (obj) {
 }
 
 //获取登录信息
-J.GetJSONSync("../api/user.aspx", "Check", {}, function (msg) {
+J.GetJSONSync(J.JHome.RootPath + "api/user.aspx", "Check", {}, function (msg) {
     if (msg.Login != undefined) {
         J.User = msg;
     }
 });
-
-//JHome中单独使用的函数
-J.JHome = {
-    LogOut:function() {
-        document.cookie = "J_UserName=; path=/";
-    },
-    IsLog:function() {
-        if (J.User != undefined) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}

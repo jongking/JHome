@@ -48,7 +48,7 @@ public partial class api_ChatMessage : GloPage
     {
         var user = Helper.GetLoginUser(Page);
         if (user == null) {
-            JsonResult.SetDateByClass(new List<ChatMessageDto>());
+            JsonResult.SetDateByClass(new MessageWrap());
             return;
         }
         var userName = user.UserName;
