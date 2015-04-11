@@ -36,7 +36,25 @@ namespace JHelper
         public static void SetCache(string cacheKey, object objObject)
         {
             var objCache = HashCache;
-            objCache.Add(cacheKey, objObject);
+            if (HasCache(cacheKey))
+            {
+                objCache[cacheKey] = objObject;
+            }
+            else
+            {
+                objCache.Add(cacheKey, objObject);
+            }
+        }
+
+        /// <summary>
+        /// 获取当前应用程序指定CacheKey的Cache值
+        /// </summary>
+        /// <param name="cacheKey"></param>
+        /// <returns></returns>
+        public static T GetCache<T>(string cacheKey)
+        {
+            var objCache = HashCache;
+            return (T)objCache[cacheKey];
         }
     }
 }

@@ -90,6 +90,11 @@ namespace JHelper.DB
             return GetDatabase(name).ExecuteDataSet(dbCommand).Tables[0];
         }
 
+        public static DataTable GetTable(string table, string name = "con")
+        {
+            return GetDatabase(name).ExecuteDataSet(CommandType.TableDirect, table).Tables[0];
+        }
+
         public static bool TestConnection(string name = "con")
         {
             DbConnection connect = null;
@@ -130,6 +135,19 @@ namespace JHelper.DB
             }
             return list;
         }
+
+        public static IList<T> GetDataTableToList<T>(DataTable dt)
+        {
+            IList<T> list = new List<T>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Type tm = typeof(T);
+                var model = GetDataRowToModel<T>(dt.Rows[i], tm);
+                list.Add(model);
+            }
+            return list;
+        }
+
         public static T GetDataRowToModel<T>(DataRow dr, Type tm)
         {
             T model = (T) Activator.CreateInstance(tm);
