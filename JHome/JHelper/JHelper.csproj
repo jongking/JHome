@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="CacheHelper.cs" />
     <Compile Include="DateHelper.cs" />
+    <Compile Include="DB\DbCacheHelper.cs" />
     <Compile Include="DB\DbHelper.cs" />
     <Compile Include="DB\SimpleDbCommandCreater.cs" />
     <Compile Include="DB\SimpleSqlCreater.cs" />
