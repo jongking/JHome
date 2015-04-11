@@ -20,7 +20,7 @@ namespace Domain.Model.Role
             
             var power = RoleRepository.GetByPowerIdWithRoleId(powerId, Id);
 
-            return power.PowerId == powerId && power.RoleId == Id;
+            return power != null;
         }
 
         /// <summary>

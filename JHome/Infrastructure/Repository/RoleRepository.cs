@@ -13,11 +13,12 @@ namespace Infrastructure.Repository
     {
         public RolePower GetByPowerIdWithRoleId(int powerId, int roleId)
         {
-            return DbHelper.GetModel<RolePower>(
-                SimpleSqlCreater.Select<RolePower>()
-                .Eq("RoleId", roleId.ToString())
-                .Eq("PowerId", powerId.ToString())
-                .ToString());
+            return DbCacheHelper.GetCache<RolePower>().FirstOrDefault(p => p.RoleId == roleId && p.PowerId == powerId);
+//            return DbHelper.GetModel<RolePower>(
+//                SimpleSqlCreater.Select<RolePower>()
+//                .Eq("RoleId", roleId.ToString())
+//                .Eq("PowerId", powerId.ToString())
+//                .ToString());
         }
     }
 }

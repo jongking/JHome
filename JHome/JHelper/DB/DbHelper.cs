@@ -92,7 +92,7 @@ namespace JHelper.DB
 
         public static DataTable GetTable(string table, string name = "con")
         {
-            return GetDatabase(name).ExecuteDataSet(CommandType.TableDirect, table).Tables[0];
+            return ExecuteDataSet(SimpleSqlCreater.Select(table).ToString(), name).Tables[0];
         }
 
         public static bool TestConnection(string name = "con")
