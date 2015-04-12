@@ -11,10 +11,10 @@ namespace Application.Dto
     {
         public int Id { get; set; }
         public string UserName { get; set; }
-        public string PassWord { get; set; }
+        public string PassWord { get { return ""; } }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-
+        
         public UserDto()
         {
         }
@@ -22,7 +22,7 @@ namespace Application.Dto
         {
             Id = user.Id;
             UserName = user.UserName;
-            PassWord = user.PassWord;
+//            PassWord = user.PassWord;
             RoleId = user.RoleId;
         }
         public bool CheckPower(int powerId)
@@ -32,6 +32,11 @@ namespace Application.Dto
         internal static UserDto GetById(int id)
         {
             return BaseDto.DtoRepository.GetModel<UserDto>(SimpleSqlCreater.Select<UserDto>().Eq("Id", id.ToString()).ToString());
+        }
+
+        internal static List<UserDto> GetAll()
+        {
+            return BaseDto.DtoRepository.GetList<UserDto>(SimpleSqlCreater.Select<UserDto>().ToString());
         }
     }
 }

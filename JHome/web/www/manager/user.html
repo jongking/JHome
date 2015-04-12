@@ -24,6 +24,17 @@
     <script src="../../resource/js/ManagerSetUp.js" type="text/javascript"></script>
     <script src="../../resource/js/SetUp.js" type="text/javascript"></script>
     <title>J</title>
+    <script>
+        $(document).ready(function() {
+            J.Table.AddTableFromJson("output", "UserName,RoleName", "Text,Text", J.JHome.RootPath + "api/User.aspx", "GetUsers", function () {
+                $("tr.TableTr").bind("click", function () {
+                    var index = $(this).attr("data-trindex");
+                    var objlist = $("#output").data("ObjList");
+                    J.JHome.RedirectTo("www/manager/user-modify.html?id=" + objlist[index].Id);
+                });
+            });
+        })
+    </script>
 </head>
 <body>
 <script src="../../resource/js/Layout/ManagerHeader.js" type="text/javascript"></script>

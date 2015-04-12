@@ -123,9 +123,9 @@ namespace JHelper.DB
             }
             return model;
         }
-        public static IList<T> GetList<T>(string sql, string name = "con")
+        public static List<T> GetList<T>(string sql, string name = "con")
         {
-            IList<T> list = new List<T>();
+            List<T> list = new List<T>();
             DataTable dt = ExecuteDataTable(sql, name);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -136,9 +136,9 @@ namespace JHelper.DB
             return list;
         }
 
-        public static IList<T> GetDataTableToList<T>(DataTable dt)
+        public static List<T> GetDataTableToList<T>(DataTable dt)
         {
-            IList<T> list = new List<T>();
+            List<T> list = new List<T>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Type tm = typeof(T);

@@ -9,7 +9,7 @@ namespace Infrastructure.Repository
 {
     public class DtoRepository : IDtoRepository
     {
-        public IList<T> GetList<T>(string msg)
+        public List<T> GetList<T>(string msg)
         {
             return DbHelper.GetList<T>(msg);
         }

@@ -20,5 +20,8 @@ J.JHome = {
         });
         return result;
     },
+    RedirectTo: function (url) {
+        location.href = J.JHome.RootPath + url;
+    },
     RootPath: "../"
 }

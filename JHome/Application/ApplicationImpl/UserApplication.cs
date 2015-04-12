@@ -26,5 +26,15 @@ namespace Application.ApplicationImpl
         {
             return new UserDto(User.UserRepository.GetByUserName(userName));
         }
+
+        public UserDto Get(int id)
+        {
+            return UserDto.GetById(id);
+        }
+
+        public List<UserDto> GetAll()
+        {
+            return UserDto.GetAll();
+        }
     }
 }

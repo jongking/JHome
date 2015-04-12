@@ -24,6 +24,14 @@
     <script src="../../resource/js/ManagerSetUp.js" type="text/javascript"></script>
     <script src="../../resource/js/SetUp.js" type="text/javascript"></script>
     <title>J</title>
+    <script>
+        $(document).ready(function () {
+            var userid = J.GetUrlParam("id");
+            J.GetJSON(J.JHome.RootPath + "api/User.aspx", "GetUserById", { UserId: userid }, function(msg) {
+                alert(msg);
+            });
+        })
+    </script>
 </head>
 <body>
 <script src="../../resource/js/Layout/ManagerHeader.js" type="text/javascript"></script>

@@ -12,5 +12,7 @@ namespace Application.IApplication
         bool Reg(string userName, string passWord);
         bool Login(string userName, string passWord);
         UserDto Get(string userName);
+        UserDto Get(int id);
+        List<UserDto> GetAll();
     }
 }

@@ -6,8 +6,11 @@ var header = '<nav class="navbar navbar-inverse navbar-fixed-top"><div class="co
     '<a class="navbar-brand" href="' + J.JHome.RootPath + 'www/chatRoom.html">这里不是黑屋子</a>' +
     '</div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav">' +
     '<li><a href="#">待定</a></li>' +
-    '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>' +
-    '<ul class="dropdown-menu" role="menu"><li><a href="#">Action</a></li></ul></li>'+
+    '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">用户管理<span class="caret"></span></a>' +
+    '<ul class="dropdown-menu" role="menu">' +
+    '<li><a href="' + J.JHome.RootPath + 'www/manager/user.html">用户</a></li>' +
+    '<li><a href="' + J.JHome.RootPath + 'www/manager/role.html">角色</a></li>' +
+    '</ul></li>'+
     '<li><a href="#">待定</a></li></ul>' +
     '<ul class="nav navbar-nav navbar-right" id="LoginShowMenu"><li><a href="#" class="UserName"></a></li><li><a href="" id="LogOutA">LogOut</a></li></ul>' +
     '<form class="navbar-form navbar-right" role="search" id="RegForm"><div class="form-group"><input type="text" class="form-control" placeholder="UserName" name="UserName" validate="{required:true,minlength:6}">' +
