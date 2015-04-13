@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -14,6 +15,7 @@ namespace JHelper.DB
         private string _linker;
         private string _orderby;
         private int _limit;
+        private Type _modelType;
         private Dictionary<string, string> _kyDictionary = new Dictionary<string, string>(); 
 
         private SimpleSqlCreater(string table, OperatorType operatorType)
@@ -24,6 +26,17 @@ namespace JHelper.DB
             _limit = 0;
             _orderby = "";
             _linker = " AND ";
+        }
+
+        private SimpleSqlCreater(string table, OperatorType operatorType, Type type)
+        {
+            _table = table;
+            _operatorType = operatorType;
+            _where = "";
+            _limit = 0;
+            _orderby = "";
+            _linker = " AND ";
+            _modelType = type;
         }
 
         public static SimpleSqlCreater Select(string table)
@@ -67,6 +80,24 @@ namespace JHelper.DB
             var table = DbHelper.GetTableFromClass<T>();
             return new SimpleSqlCreater(table, OperatorType.Delete);
         }
+
+        public static SimpleSqlCreater CreateTable<T>()
+        {
+            var table = DbHelper.GetTableFromClass<T>();
+            return new SimpleSqlCreater(table, OperatorType.CreateTable, typeof(T));
+        }
+
+        public static SimpleSqlCreater DropTable(string table)
+        {
+            return new SimpleSqlCreater(table, OperatorType.DropTable);
+        }
+
+        public static SimpleSqlCreater DropTable<T>()
+        {
+            var table = DbHelper.GetTableFromClass<T>();
+            return new SimpleSqlCreater(table, OperatorType.DropTable);
+        }
+
         public SimpleSqlCreater Eq(string filedName, string param, string separator = "'")
         {
             _where += _linker + string.Format(" {0} = {2}{1}{2} ", filedName, param, separator);
@@ -206,6 +237,57 @@ namespace JHelper.DB
             {
                 return "(" + _where.Substring(5) + ")";
             }
+            if (_operatorType == OperatorType.CreateTable)
+            {
+                var tempstr = "";
+                PropertyInfo[] pis = _modelType.GetProperties();
+                bool haveId = false;
+
+                foreach (var propertyInfo in pis)
+                {
+                    if (propertyInfo.CanWrite)
+                    {
+                        string propertyName = propertyInfo.Name;
+                        if (propertyName.ToLower() == "id")
+                        {
+                            haveId = true;
+                            tempstr += string.Format("{0} [bigint] IDENTITY(1,1) NOT NULL,", propertyName);
+                            continue;
+                        }
+                        switch (propertyInfo.PropertyType.Name.ToLower())
+                        {
+                            case "string":
+                                tempstr += string.Format("{0} [nvarchar](100),", propertyName);
+                                break;
+                            case "datetime":
+                                tempstr += string.Format("{0} [datetime],", propertyName);
+                                break;
+                            case "int32":
+                                tempstr += string.Format("{0} [bigint],", propertyName);
+                                break;
+                            case "int64":
+                                tempstr += string.Format("{0} [bigint],", propertyName);
+                                break;
+                            case "double":
+                                tempstr += string.Format("{0} [float],", propertyName);
+                                break;
+                            case "bool":
+                                tempstr += string.Format("{0} [bit],", propertyName);
+                                break;
+                        }
+                    }
+                }
+
+                if (haveId)
+                {
+                    tempstr += " PRIMARY KEY CLUSTERED ( [Id] ASC )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]";
+                }
+                return string.Format("CREATE TABLE {0} ({1})", _table, tempstr);
+            }
+            if (_operatorType == OperatorType.DropTable)
+            {
+                return string.Format("IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{0}') AND type in (N'U')) DROP TABLE {0}", _table);
+            }
             return "ERROR";
         }
 
@@ -215,7 +297,9 @@ namespace JHelper.DB
             Insert,
             Update,
             Delete,
-            Where
+            Where,
+            CreateTable,
+            DropTable
         }
 
         public enum OrderByType
