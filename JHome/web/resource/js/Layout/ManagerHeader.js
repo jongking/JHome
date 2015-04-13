@@ -3,9 +3,12 @@ var header = '<nav class="navbar navbar-inverse navbar-fixed-top"><div class="co
     '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>' +
     '<a id="LinkManager" class="navbar-brand" href="' + J.JHome.RootPath + 'www/manager" style="display:none;"><span class="glyphicon glyphicon-home"></span></a>' +
     '<a class="navbar-brand" href="' + J.JHome.RootPath + 'www">JHome</a>' +
-    '<a class="navbar-brand" href="' + J.JHome.RootPath + 'www/chatRoom.html">这里不是黑屋子</a>' +
+    '<a class="navbar-brand" href="' + J.JHome.RootPath + 'www/chatRoom.html"></a>' +
     '</div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav">' +
-    '<li><a href="#">待定</a></li>' +
+    '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">爬虫<span class="caret"></span></a>' +
+    '<ul class="dropdown-menu" role="menu">' +
+    '<li><a href="' + J.JHome.RootPath + 'www/manager/user.html">漫画爬虫</a></li>' +
+    '</ul></li>' +
     '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">用户管理<span class="caret"></span></a>' +
     '<ul class="dropdown-menu" role="menu">' +
     '<li><a href="' + J.JHome.RootPath + 'www/manager/user.html">用户</a></li>' +
