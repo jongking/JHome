@@ -79,5 +79,11 @@ namespace JHelper
                 .Replace(">", @"\>")
                 .Replace("$", @"\$");
         }
+
+        public enum RegexFormatOption
+        {
+            Format,
+            NotFormat
+        }
     }
 }

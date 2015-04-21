@@ -62,6 +62,10 @@
       <Project>{8d7f746f-4d9d-4de6-b83d-0fc47ad72fff}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JHelper\JHelper.csproj">
+      <Project>{79c77b98-d95c-4c69-b594-aefeeb9fe6fe}</Project>
+      <Name>JHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\" />

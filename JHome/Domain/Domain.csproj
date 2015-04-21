@@ -45,6 +45,9 @@
     <Compile Include="IRepository\IRoleRepository.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="Model\ChatMessage.cs" />
+    <Compile Include="Model\Comic\Comic.cs" />
+    <Compile Include="Model\Comic\ComicPage.cs" />
+    <Compile Include="Model\Comic\ComicVolume.cs" />
     <Compile Include="Model\Role\Power.cs" />
     <Compile Include="Model\Role\Role.cs" />
     <Compile Include="Model\Role\RolePower.cs" />

@@ -5,7 +5,7 @@ var header = '<nav class="navbar navbar-inverse navbar-fixed-top"><div class="co
     '<a class="navbar-brand" href="' + J.JHome.RootPath + 'www">JHome</a>' +
     '<a class="navbar-brand" href="' + J.JHome.RootPath + 'www/chatRoom.html">黑屋子</a>' +
     '</div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav">' +
-    '<li><a href="#">待定</a></li><li><a href="#">待定</a></li></ul>' +
+    '<li><a href="' + J.JHome.RootPath + 'www/comic.html">看漫画</a></li><li><a href="#">待定</a></li></ul>' +
     '<ul class="nav navbar-nav navbar-right" id="LoginShowMenu"><li><a href="#" class="UserName"></a></li><li><a href="" id="LogOutA">LogOut</a></li></ul>' +
     '<form class="navbar-form navbar-right" role="search" id="RegForm"><div class="form-group"><input type="text" class="form-control" placeholder="UserName" name="UserName" validate="{required:true,minlength:6}">' +
     '<input type="password" class="form-control" placeholder="PassWord" name="PassWord" validate="{required:true,minlength:8}">' +

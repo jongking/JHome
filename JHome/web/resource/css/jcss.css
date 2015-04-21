@@ -9,3 +9,7 @@
 .Body {
     left: 0; overflow: auto; position: absolute; right: 0; top: 60px;
 }
+
+.J-Img-max {
+    width: 100%;
+}
