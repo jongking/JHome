@@ -24,6 +24,13 @@
     <script src="../resource/js/SetUp.js" type="text/javascript"></script>
     <title>J</title>
     <script>
+        $(document).ready(function () {
+            J.GetJSON(J.JHome.RootPath + "api/Comic.aspx", "GetComicDetail", {}, function (objList) {
+                var template = '{{#ComicList}}<div class="col-xs-4 col-md-3"><img src="../resource/images/{{CoverImgPath}}" alt="{{TitleName}}" class="img-rounded img-responsive" onclick="TurnToDetail({{Id}})"><h4>{{TitleName}}<small>{{LastVolumeName}}</small></h4></div>{{/ComicList}}';
+                var result = Mustache.render(template, { ComicList: objList });
+                $("#output").append(result);
+            });
+        });
         function TurnToPage(volumeid) {
             var comicid = J.GetUrlParam("comicid");
             if (comicid == undefined || comicid == "") {

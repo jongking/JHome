@@ -22,7 +22,6 @@ namespace Application.Dto
         {
             Id = user.Id;
             UserName = user.UserName;
-//            PassWord = user.PassWord;
             RoleId = user.RoleId;
         }
         public bool CheckPower(int powerId)

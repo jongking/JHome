@@ -40,11 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationImpl\ChatMessageApplication.cs" />
+    <Compile Include="ApplicationImpl\ComicApplication.cs" />
     <Compile Include="ApplicationImpl\UserApplication.cs" />
     <Compile Include="Dto\BaseDto.cs" />
     <Compile Include="Dto\ChatMessageDto.cs" />
+    <Compile Include="Dto\ComicDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="IApplication\IChatMessageApplication.cs" />
+    <Compile Include="IApplication\IComicApplication.cs" />
     <Compile Include="IApplication\IUserApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

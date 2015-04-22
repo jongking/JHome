@@ -19,11 +19,19 @@
     <script src="../resource/js/jquery.metadata.js" type="text/javascript"></script>
     <script src="../resource/js/jquery.validate.js" type="text/javascript"></script>
     <script src="../resource/js/jquery.form.js" type="text/javascript"></script>
+    <script src="../resource/js/mustache.js" type="text/javascript"></script>
     <script src="../resource/js/Helper.js" type="text/javascript"></script>
     <script src="../resource/js/JHome.js" type="text/javascript"></script>
     <script src="../resource/js/SetUp.js" type="text/javascript"></script>
     <title>J</title>
     <script>
+        $(document).ready(function() {
+            J.GetJSON(J.JHome.RootPath + "api/Comic.aspx", "GetAllComics", {}, function (objList) {
+                var template = '{{#ComicList}}<div class="col-xs-4 col-md-3"><img src="../resource/images/{{CoverImgPath}}" alt="{{TitleName}}" class="img-rounded img-responsive" onclick="TurnToDetail({{Id}})"><h4>{{TitleName}}<small>{{LastVolumeName}}</small></h4></div>{{/ComicList}}';
+                var result = Mustache.render(template, {ComicList : objList});
+                $("#output").append(result);
+            });
+        });
         function TurnToDetail(comicid) {
             J.JHome.RedirectTo("www/comicDetail.html?comicid=" + comicid);
         }
@@ -31,12 +39,8 @@
 </head>
 <body>
     <script src="../resource/js/Layout/Header.js" type="text/javascript"></script>
-    <div class="container-fluid Body" id="output">
-        <div class="row">
-            <div class="col-xs-4 col-md-3"><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-rounded img-responsive" onclick="TurnToDetail(1)"><h4>标题<small>话数</small></h4></div>
-            <div class="col-xs-4 col-md-3"><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-rounded img-responsive" onclick="TurnToDetail(1)"><h4>标题<small>话数</small></h4></div>
-            <div class="col-xs-4 col-md-3"><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-rounded img-responsive" onclick="TurnToDetail(1)"><h4>标题<small>话数</small></h4></div>
-            <div class="col-xs-4 col-md-3"><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-rounded img-responsive" onclick="TurnToDetail(1)"><h4>标题<small>话数</small></h4></div>
+    <div class="container-fluid Body">
+        <div class="row" id="output">
         </div>
     </div>
 </body>
