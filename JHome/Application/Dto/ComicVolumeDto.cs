@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Domain.Model.Comic
+namespace Application.Dto
 {
-    public class ComicVolume
+    public class ComicVolumeDto
     {
         public int Id { get; set; }
-        /// <summary>
-        /// 连接Comic类中的Id
-        /// </summary>
         public int ComicId { get; set; }
         public string VolumeName { get; set; }
         public int SortNo { get; set; }
-
-        public List<ComicPage> ComicPages()
-        {
-            return new List<ComicPage>();
-        }
     }
 }

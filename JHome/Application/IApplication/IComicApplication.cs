@@ -9,5 +9,7 @@ namespace Application.IApplication
     public interface IComicApplication
     {
         List<ComicDto> GetAll();
+        List<ComicVolumeDto> GetVolumeById(int id);
+        ComicDto GetById(int id);
     }
 }

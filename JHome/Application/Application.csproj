@@ -45,6 +45,7 @@
     <Compile Include="Dto\BaseDto.cs" />
     <Compile Include="Dto\ChatMessageDto.cs" />
     <Compile Include="Dto\ComicDto.cs" />
+    <Compile Include="Dto\ComicVolumeDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="IApplication\IChatMessageApplication.cs" />
     <Compile Include="IApplication\IComicApplication.cs" />

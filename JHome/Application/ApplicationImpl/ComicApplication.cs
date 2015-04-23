@@ -13,5 +13,15 @@ namespace Application.ApplicationImpl
         {
             return ComicDto.GetAll();
         }
+
+        public List<ComicVolumeDto> GetVolumeById(int id)
+        {
+            return ComicDto.GetVolumeById(id);
+        }
+
+        public ComicDto GetById(int id)
+        {
+            return ComicDto.GetById(id);
+        }
     }
 }

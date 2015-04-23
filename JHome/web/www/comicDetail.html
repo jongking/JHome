@@ -25,7 +25,10 @@
     <title>J</title>
     <script>
         $(document).ready(function () {
-            J.GetJSON(J.JHome.RootPath + "api/Comic.aspx", "GetComicDetail", {}, function (objList) {
+            J.GetJSON(J.JHome.RootPath + "api/Comic.aspx", "GetComicDetail", {}, function (comicwrap) {
+                if (comicwrap.Comic != undefined) {
+                    
+                }
                 var template = '{{#ComicList}}<div class="col-xs-4 col-md-3"><img src="../resource/images/{{CoverImgPath}}" alt="{{TitleName}}" class="img-rounded img-responsive" onclick="TurnToDetail({{Id}})"><h4>{{TitleName}}<small>{{LastVolumeName}}</small></h4></div>{{/ComicList}}';
                 var result = Mustache.render(template, { ComicList: objList });
                 $("#output").append(result);
