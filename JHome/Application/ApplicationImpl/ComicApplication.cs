@@ -19,6 +19,11 @@ namespace Application.ApplicationImpl
             return ComicDto.GetVolumeById(id);
         }
 
+        public List<ComicPageDto> GetPagesByVolId(int volid)
+        {
+            return ComicDto.GetPagesByVolId(volid);
+        }
+
         public ComicDto GetById(int id)
         {
             return ComicDto.GetById(id);

@@ -19,21 +19,30 @@
     <script src="../resource/js/jquery.metadata.js" type="text/javascript"></script>
     <script src="../resource/js/jquery.validate.js" type="text/javascript"></script>
     <script src="../resource/js/jquery.form.js" type="text/javascript"></script>
+    <script src="../resource/js/mustache.js" type="text/javascript"></script>
     <script src="../resource/js/Helper.js" type="text/javascript"></script>
     <script src="../resource/js/JHome.js" type="text/javascript"></script>
     <script src="../resource/js/SetUp.js" type="text/javascript"></script>
     <title>J</title>
+    <script>
+        $(document).ready(function () {
+            J.Header.SetHeaderOpacity(0.5);
+            var comicid = J.GetUrlParam("comicid");
+            var volumeid = J.GetUrlParam("volumeid");
+            J.GetJSON(J.JHome.RootPath + "api/Comic.aspx", "GetComicPages", { comicid: comicid, volumeid: volumeid }, function (comicwrap) {
+                if (comicwrap.Comic != undefined) {
+                    var template = '<ul class="list-unstyled">{{#ComicPageList}}<li><img src="../resource/images/{{PageImgPath}}" class="img-responsive J-Img-max"></li>{{/ComicPageList}}</ul>';
+                    var result = Mustache.render(template, comicwrap);
+                    $("#output").html(result);
+                }
+            });
+        });
+    </script>
 </head>
 <body style="background-color: black;">
     <script src="../resource/js/Layout/Header.js" type="text/javascript"></script>
     <div class="container-fluid Body" id="output" ondblclick="history.back(-1)">
-        <ul class="list-unstyled">
-            <li><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-responsive J-Img-max"></li>
-            <li><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-responsive J-Img-max"></li>
-            <li><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-responsive J-Img-max"></li>
-            <li><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-responsive J-Img-max"></li>
-            <li><img src="../resource/images/beijixiong.jpg" alt="标题" class="img-responsive J-Img-max"></li>
-        </ul>
+        
     </div>
 </body>
 </html>

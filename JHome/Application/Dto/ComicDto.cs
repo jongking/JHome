@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Domain.Model.Comic;
 using JHelper.DB;
 
 namespace Application.Dto
@@ -27,7 +28,28 @@ namespace Application.Dto
 
         internal static List<ComicVolumeDto> GetVolumeById(int id)
         {
-            return BaseDto.DtoRepository.GetList<ComicVolumeDto>(SimpleSqlCreater.Select<ComicVolumeDto>().Eq("ComicId", id.ToString()).ToString());
+            return BaseDto.DtoRepository.GetList<ComicVolumeDto>(SimpleSqlCreater.Select<ComicVolume>().Eq("ComicId", id.ToString()).ToString());
         }
+
+        internal static List<ComicPageDto> GetPagesByVolId(int volid)
+        {
+            return BaseDto.DtoRepository.GetList<ComicPageDto>(SimpleSqlCreater.Select<ComicPage>().Eq("VolumeId", volid.ToString()).ToString());
+        }
+    }
+
+    public class ComicVolumeDto
+    {
+        public int Id { get; set; }
+        public int ComicId { get; set; }
+        public string VolumeName { get; set; }
+        public int SortNo { get; set; }
+    }
+
+    public class ComicPageDto
+    {
+        public int ComicId { get; set; }
+        public int VolumeId { get; set; }
+        public int PageNumber { get; set; }
+        public string PageImgPath { get; set; }
     }
 }

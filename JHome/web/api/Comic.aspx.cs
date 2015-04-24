@@ -39,9 +39,29 @@ public partial class api_Comic : GloPage
         }
     }
 
+    public void GetComicPages()
+    {
+        var comicid = WebHelper.Request("comicid", Page);
+        var volumeid = WebHelper.Request("volumeid", Page);
+
+        var comic = _comicApplication.GetById(Convert.ToInt32(comicid));
+        if (comic.Id > 0)
+        {
+            var comicPages = _comicApplication.GetPagesByVolId(Convert.ToInt32(volumeid));
+
+            var comicWrapper = new ComicWrapper()
+            {
+                Comic = comic,
+                ComicPageList = comicPages
+            };
+            JsonResult.SetDateByClass(comicWrapper);
+        }
+    }
+
     public class ComicWrapper
     {
         public ComicDto Comic;
         public List<ComicVolumeDto> ComicVolumeList;
+        public List<ComicPageDto> ComicPageList;
     }
 }
