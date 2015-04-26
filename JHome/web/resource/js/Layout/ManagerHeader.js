@@ -7,7 +7,7 @@ var header = '<nav class="navbar navbar-inverse navbar-fixed-top"><div class="co
     '</div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav">' +
     '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">爬虫<span class="caret"></span></a>' +
     '<ul class="dropdown-menu" role="menu">' +
-    '<li><a href="' + J.JHome.RootPath + 'www/manager/user.html">漫画爬虫</a></li>' +
+    '<li><a href="' + J.JHome.RootPath + 'www/manager/comicCrawler.html">漫画爬虫</a></li>' +
     '</ul></li>' +
     '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">用户管理<span class="caret"></span></a>' +
     '<ul class="dropdown-menu" role="menu">' +

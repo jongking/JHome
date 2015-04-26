@@ -7,7 +7,7 @@
 }
 
 .Body {
-    left: 0; overflow: auto; position: absolute; right: 0; top: 60px;
+    left: 0; overflow: auto; position: absolute; right: 0; top: 60px; bottom: 40px; 
 }
 
 .J-Img-max {
