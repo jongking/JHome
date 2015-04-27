@@ -1,0 +1,2 @@
+//按下Ctrl-Q有内部函数提示 jsResultWrap.result 是保存返回的结果的对象
+jsResultWrap.result = "e";
