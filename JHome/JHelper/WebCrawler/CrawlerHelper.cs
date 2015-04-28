@@ -7,6 +7,11 @@ namespace JHelper.WebCrawler
 {
     public static class CrawlerHelper
     {
+        public static string CrawlOverToStr(string uri)
+        {
+            return CrawlOverToStr(new Uri(uri));
+        }
+
         public static string CrawlOverToStr(Uri uri)
         {
             HttpHelper http = new HttpHelper();
@@ -15,6 +20,10 @@ namespace JHelper.WebCrawler
             return result.Html;
         }
 
+        public static CrawlerResult CrawlOverToCrawlerResult(string uri)
+        {
+            return new CrawlerResult(CrawlOverToStr(uri));
+        }
         public static CrawlerResult CrawlOverToCrawlerResult(Uri uri)
         {
             return new CrawlerResult(CrawlOverToStr(uri));
@@ -33,12 +42,12 @@ namespace JHelper.WebCrawler
         /// </summary>
         public CrawlerResult GetContextCover(string left, string right)
         {
-            _crawlStr = RegexHelper.GetContextCover(_crawlStr, left, right);
+            _crawlStr = RegexHelper.GetContextCoverS(_crawlStr, left, right);
             return this;
         }
         public CrawlerResult GetContextCoverBy(string left, string right)
         {
-            _crawlStr = RegexHelper.GetContextCoverBy(_crawlStr, left, right);
+            _crawlStr = RegexHelper.GetContextCoverByS(_crawlStr, left, right);
             return this;
         }
         public override string ToString()

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using JHelper;
+using JHelper.WebCrawler;
 using Microsoft.ClearScript;
 using Microsoft.ClearScript.V8;
 using Microsoft.ClearScript.Windows;
@@ -17,13 +18,12 @@ public partial class api_Crawler : GloPage
         var js = WebHelper.Request("JS", Page);
         var jsResultWrap = new JsResultWrap();
 
-
         using (ScriptEngine engine = new JScriptEngine())
         {
             //添加用于返回的result对象
-//            engine.AddHostObject("result", result);
-
             engine.AddHostObject("jsResultWrap", jsResultWrap);
+            engine.AddHostType("CrawlerHelper", typeof(CrawlerHelper));
+            engine.AddHostType("RegexHelper", typeof(RegexHelper));
             engine.Execute(js);
         }
 

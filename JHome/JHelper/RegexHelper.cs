@@ -11,15 +11,27 @@ namespace JHelper
     /// </summary>    
     public class RegexHelper
     {
+        public static string GetContextCoverS(string input, string left, string right)
+        {
+            left = RegexHelper.FormatRegexToString(left);
+            right = RegexHelper.FormatRegexToString(right);
+            return RegexHelper.GetContextCover(input, left, right);
+        }
+
         /// <summary>
         /// 获取用left和right包围的内容,返回不包括left和right
         /// </summary>
         public static string GetContextCover(string input, string left, string right)
         {
-            left = FormatRegexToString(left);
-            right = FormatRegexToString(right);
             var regex = new Regex(left + "(?<Result>.*)" + right, RegexOptions.Compiled);
             return regex.Match(input).Groups["Result"].Value;
+        }
+
+        public static string GetContextCoverByS(string input, string left, string right)
+        {
+            left = RegexHelper.FormatRegexToString(left);
+            right = RegexHelper.FormatRegexToString(right);
+            return RegexHelper.GetContextCoverBy(input, left, right);
         }
 
         /// <summary>
@@ -27,10 +39,9 @@ namespace JHelper
         /// </summary>
         public static string GetContextCoverBy(string input, string left, string right)
         {
-            left = FormatRegexToString(left);
-            right = FormatRegexToString(right);
             var regex = new Regex(left + ".*" + right, RegexOptions.Compiled);
-            return regex.Match(input).Value;
+            var match = regex.Match(input);
+            return match.Value;
         }
         /// <summary>
         /// 验证输入字符串是否与模式字符串匹配，匹配返回true

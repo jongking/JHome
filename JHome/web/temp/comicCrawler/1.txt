@@ -1,2 +1,9 @@
-//按下Ctrl-Q有内部函数提示 jsResultWrap.result 是保存返回的结果的对象
-jsResultWrap.result = "e";
+//按下Ctrl-Q有内部函数提示 jsResultWrap.result 是保存返回的结果的对象 CrawlerHelper是爬虫的帮助类 RegexHelper是正则帮助类
+var mainhtml = CrawlerHelper.CrawlOverToStr("http://manhua.dmzj.com/update_1.shtml");
+//一个漫画的标题信息<div class="boxdiv1"><div class="picborder"><a target="_blank" href="ylian/" title="冴恋">
+//<img src="http://images.dmzj.com/webpic/8/arc001ylaian428.jpg" alt="冴恋"></a></div><!--picborder-->
+//<div class="pictext"><ul><li><a href="ylian/" target="_blank" title="冴恋" class="pictextst">冴恋</a></li><li class="pictextli">作者:<span class="gray12">内水融</span></li>
+//<li>分类：百合</li><li>更新：<a target="_blank" title="第01话" href="/ylian/38290.shtml">第01话</a></li><li>状态：连载中</li>
+//<li class="numfont"><span class="color_red">2015-04-28 22:12</span></li></ul></div><!--pictext--></div>
+var oneComic = RegexHelper.GetContextCoverByS(mainhtml, '<div class="boxdiv1">', "</div>");
+jsResultWrap.result = oneComic;
