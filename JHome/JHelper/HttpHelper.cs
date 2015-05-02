@@ -174,6 +174,8 @@ namespace JHelper
             SetPostData(objhttpItem);
             //设置最大连接
             if (objhttpItem.Connectionlimit > 0) request.ServicePoint.ConnectionLimit = objhttpItem.Connectionlimit;
+            //设置host
+            if (objhttpItem.Host.Length > 0) { request.Host = objhttpItem.Host; }
         }
         /// <summary>
         /// 设置证书
@@ -565,6 +567,16 @@ namespace JHelper
         /// 设置或获取Post参数编码,默认的为Default编码
         /// </summary>
         public Encoding PostEncoding { get; set; }
+
+        private string _host = string.Empty;
+        /// <summary>
+        /// 代理 服务IP
+        /// </summary>
+        public string Host
+        {
+            get { return _host; }
+            set { _host = value; }
+        }
     }
     /// <summary>
     /// Http返回参数类

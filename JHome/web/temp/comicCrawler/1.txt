@@ -1,9 +1,41 @@
-//按下Ctrl-Q有内部函数提示 jsResultWrap.result 是保存返回的结果的对象 CrawlerHelper是爬虫的帮助类 RegexHelper是正则帮助类
+//按下Ctrl-Q有内部函数提示 Console.Write 是输出结果到控制台的方法 CrawlerHelper是爬虫的帮助类 RegexHelper是正则帮助类 ParserHelper是剖析器帮助类
 var mainhtml = CrawlerHelper.CrawlOverToStr("http://manhua.dmzj.com/update_1.shtml");
-//一个漫画的标题信息<div class="boxdiv1"><div class="picborder"><a target="_blank" href="ylian/" title="冴恋">
-//<img src="http://images.dmzj.com/webpic/8/arc001ylaian428.jpg" alt="冴恋"></a></div><!--picborder-->
-//<div class="pictext"><ul><li><a href="ylian/" target="_blank" title="冴恋" class="pictextst">冴恋</a></li><li class="pictextli">作者:<span class="gray12">内水融</span></li>
-//<li>分类：百合</li><li>更新：<a target="_blank" title="第01话" href="/ylian/38290.shtml">第01话</a></li><li>状态：连载中</li>
-//<li class="numfont"><span class="color_red">2015-04-28 22:12</span></li></ul></div><!--pictext--></div>
-var oneComic = RegexHelper.GetContextCoverByS(mainhtml, '<div class="boxdiv1">', "</div>");
-jsResultWrap.result = oneComic;
+
+var comicTitleXPath = '//div[@class="boxdiv1"]';
+var comicTitle_TitleXPath = '//a[@class="pictextst"]';
+var comicTitle_AuthXPath = '//span[@class="gray12"]';
+var comicTitle_TypeXPath = '//div[@class="pictext"]/ul[1]/li[3]';
+var comicTitle_ImgUrlXPath = '//img[1]';
+
+var xPathDoc = ParserHelper.GetXPathParserDoc(mainhtml);
+var rootNode = xPathDoc.DocumentNode;
+var comicTitleNodeList = rootNode.SelectNodes(comicTitleXPath);
+
+if(comicTitleNodeList == null){
+    Console.Write("comicTitleNodeList == null");
+}
+
+Helper.ForEach(comicTitleNodeList, function(obj){
+    if(obj == null){
+        Console.Write("comicTitleNodeList.obj == null");
+        return false;
+    }
+    else{
+//         var temp = ParserHelper.GetXPathParserDoc(obj.OuterHtml).DocumentNode;
+//         var title = temp.SelectSingleNode(comicTitle_TitleXPath);
+        var temp = ParserHelper.GetXPathParserNode(obj.InnerHtml);
+        var title = temp.SelectSingleNode(comicTitle_TitleXPath).InnerHtml;
+        var auth = temp.SelectSingleNode(comicTitle_AuthXPath).InnerHtml;
+        var type = temp.SelectSingleNode(comicTitle_TypeXPath).InnerHtml;
+        var ingUrl = temp.SelectSingleNode(comicTitle_ImgUrlXPath).GetAttributeValue("src", "");
+        
+        var flat = ComicApp.AddComic(title, title, type, auth, title, ingUrl, ingUrl);
+        if(flat == true){
+            Console.Write("漫画: " + title + " 添加成功");
+        }
+        else{
+            Console.Write("漫画: " + title + " 添加失败");
+        }
+//         Console.Write("漫画名:" + title.InnerHtml + " 作者:" + auth.InnerHtml + " 分类:" + type.InnerHtml + " 图片路径:" + ingUrl.GetAttributeValue("src", ""));
+    }
+});

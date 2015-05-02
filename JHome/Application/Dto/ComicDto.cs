@@ -12,9 +12,13 @@ namespace Application.Dto
         public int Id { get; set; }
         public string ComicName { get; set; }
         public string TitleName { get; set; }
+        public string ComicType { get; set; }
+        public string ComicAuthor { get; set; }
         public string Description { get; set; }
         public string CoverImgPath { get; set; }
+        public string OrginCoverImgPath { get; set; }
         public string LastVolumeName { get; set; }
+        public int ComicState { get; set; }
 
         internal static List<ComicDto> GetAll()
         {

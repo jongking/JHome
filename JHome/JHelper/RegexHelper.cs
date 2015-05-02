@@ -13,9 +13,9 @@ namespace JHelper
     {
         public static string GetContextCoverS(string input, string left, string right)
         {
-            left = RegexHelper.FormatRegexToString(left);
-            right = RegexHelper.FormatRegexToString(right);
-            return RegexHelper.GetContextCover(input, left, right);
+            left = FormatRegexToString(left);
+            right = FormatRegexToString(right);
+            return GetContextCover(input, left, right);
         }
 
         /// <summary>
@@ -29,9 +29,9 @@ namespace JHelper
 
         public static string GetContextCoverByS(string input, string left, string right)
         {
-            left = RegexHelper.FormatRegexToString(left);
-            right = RegexHelper.FormatRegexToString(right);
-            return RegexHelper.GetContextCoverBy(input, left, right);
+            left = FormatRegexToString(left);
+            right = FormatRegexToString(right);
+            return GetContextCoverBy(input, left, right);
         }
 
         /// <summary>
@@ -89,12 +89,6 @@ namespace JHelper
                 .Replace("<", @"\<")
                 .Replace(">", @"\>")
                 .Replace("$", @"\$");
-        }
-
-        public enum RegexFormatOption
-        {
-            Format,
-            NotFormat
         }
     }
 }

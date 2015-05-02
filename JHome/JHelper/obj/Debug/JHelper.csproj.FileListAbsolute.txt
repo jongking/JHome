@@ -19,3 +19,10 @@ H:\GitHub\JHome\JHome\JHelper\bin\Debug\Microsoft.Practices.Unity.xml
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\Microsoft.Practices.Unity.Interception.xml
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+H:\GitHub\JHome\JHome\JHelper\bin\Debug\JHelper.dll.config
+H:\GitHub\JHome\JHome\JHelper\bin\Debug\CsQuery.dll
+H:\GitHub\JHome\JHome\JHelper\bin\Debug\HtmlAgilityPack.dll
+H:\GitHub\JHome\JHome\JHelper\bin\Debug\CsQuery.xml
+H:\GitHub\JHome\JHome\JHelper\bin\Debug\HtmlAgilityPack.pdb
+H:\GitHub\JHome\JHome\JHelper\bin\Debug\HtmlAgilityPack.xml
+H:\GitHub\JHome\JHome\JHelper\obj\Debug\JHelper.csprojResolveAssemblyReference.cache

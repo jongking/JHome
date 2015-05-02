@@ -28,6 +28,7 @@
         $(document).ready(function() {
             J.GetJSON(J.JHome.RootPath + "api/Comic.aspx", "GetAllComics", {}, function (objList) {
                 var template = '{{#ComicList}}<div class="col-xs-4 col-md-3"><img src="../resource/images/{{CoverImgPath}}" alt="{{TitleName}}" class="img-rounded img-responsive" onclick="TurnToDetail({{Id}})"><h4>{{TitleName}}<small>{{LastVolumeName}}</small></h4></div>{{/ComicList}}';
+//                var template = '{{#ComicList}}<div class="col-xs-4 col-md-3"><img src="{{CoverImgPath}}" alt="{{TitleName}}" class="img-rounded img-responsive" onclick="TurnToDetail({{Id}})"><h4>{{TitleName}}<small>{{LastVolumeName}}</small></h4></div>{{/ComicList}}';
                 var result = Mustache.render(template, {ComicList : objList});
                 $("#output").append(result);
             });

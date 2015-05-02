@@ -20,3 +20,8 @@ H:\GitHub\JHome\JHome\Domain\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 H:\GitHub\JHome\JHome\Domain\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 H:\GitHub\JHome\JHome\Domain\bin\Debug\Microsoft.Practices.Unity.xml
 H:\GitHub\JHome\JHome\Domain\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+H:\GitHub\JHome\JHome\Domain\bin\Debug\HtmlAgilityPack.dll
+H:\GitHub\JHome\JHome\Domain\bin\Debug\CsQuery.dll
+H:\GitHub\JHome\JHome\Domain\bin\Debug\HtmlAgilityPack.pdb
+H:\GitHub\JHome\JHome\Domain\bin\Debug\HtmlAgilityPack.xml
+H:\GitHub\JHome\JHome\Domain\bin\Debug\CsQuery.xml

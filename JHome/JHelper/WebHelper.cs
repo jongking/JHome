@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Web.UI;
 using System.Web.Script.Serialization;
 
@@ -30,6 +31,23 @@ namespace JHelper
             var jss = new JavaScriptSerializer();
             T obj = jss.Deserialize<T>(str);
             return obj;
+        }
+
+        public static string HtmlEncode(string str)
+        {
+            return HttpUtility.HtmlEncode(str);
+//            str.Replace("<", "<");
+//            str.Replace(">", ">");
+//            str.Replace(" ", " ");
+//            str.Replace("　", " ");
+//            str.Replace("\'", "'");
+//            str.Replace("\"", "");
+//            str.Replace("/n", "<br/>");
+        }
+
+        public static string HtmlDecode(string str)
+        {
+            return HttpUtility.HtmlDecode(str);
         }
     }
 }
