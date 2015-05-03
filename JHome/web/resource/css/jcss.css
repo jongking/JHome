@@ -13,3 +13,8 @@
 .J-Img-max {
     width: 100%;
 }
+
+.j-img-cover {
+    width: 110px;
+    height: 152px;
+}

@@ -29,9 +29,10 @@ Helper.ForEach(comicTitleNodeList, function(obj){
         var type = temp.SelectSingleNode(comicTitle_TypeXPath).InnerHtml;
         var ingUrl = temp.SelectSingleNode(comicTitle_ImgUrlXPath).GetAttributeValue("src", "");
         
-        var flat = ComicApp.AddComic(title, title, type, auth, title, ingUrl, ingUrl);
+        var flat = ComicApp.AddComic(title, title, type, auth, title, ingUrl);
         if(flat == true){
-            Console.Write("漫画: " + title + " 添加成功");
+//             ComicApp.DownLoadOverImage(title, "http://manhua.dmzj.com/update_1.shtml");
+            Console.Write("漫画: " + title + " 添加成功" + auth);
         }
         else{
             Console.Write("漫画: " + title + " 添加失败");

@@ -41,7 +41,6 @@ namespace Domain.Model.Comic
 
             return true;
         }
-
         /// <summary>
         /// 领域模型自检
         /// </summary>

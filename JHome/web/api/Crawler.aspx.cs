@@ -22,6 +22,7 @@ public partial class api_Crawler : GloPage
     {
         var js = WebHelper.Request("JS", Page);
         var jsResultWrap = new JsResultWrap();
+        var comicApp = new ComicApp(Server);
 
         using (ScriptEngine engine = new JScriptEngine())
         {
@@ -37,7 +38,7 @@ public partial class api_Crawler : GloPage
             engine.AddHostType("Helper", typeof(Extensions));
             
             //添加漫画的应用程序类
-            engine.AddHostObject("ComicApp", _comicApplication);
+            engine.AddHostObject("ComicApp", comicApp);
 
             //执行js
             engine.Execute(js);
@@ -73,6 +74,30 @@ public partial class api_Crawler : GloPage
             {
                 result += "<span class='text-primary'>Console -> </span><span class='text-danger'>" + WebHelper.HtmlEncode(str) + "</span><br/>";
             }
+        }
+    }
+
+    public class ComicApp
+    {
+        private readonly IComicApplication _comicApplication = ApplicationFactory.CreateInstance<IComicApplication>("Comic");
+
+        private readonly HttpServerUtility _server;
+
+        public ComicApp(HttpServerUtility server)
+        {
+            _server = server;
+        }
+
+        public bool AddComic(string name, string titlename, string type = "", string auth = "未知", string des = "",
+            string orginCoverImg = "", int state = 0)
+        {
+            return _comicApplication.AddComic(name, titlename, type, auth, des, orginCoverImg, state);
+        }
+
+        public bool DownLoadOverImage(string comicname, string currentPage = "", string host = "images.dmzj.com")
+        {
+            var serImgpath = _server.MapPath(@"../resource/images/comic/");
+            return _comicApplication.DownLoadOverImage(comicname, serImgpath, currentPage, host);
         }
     }
     public static class Extensions

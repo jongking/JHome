@@ -34,6 +34,7 @@ namespace JHelper.WebCrawler
             HttpHelper http = new HttpHelper();
             HttpItem item = httpItem;
             item.URL = uri.AbsoluteUri;
+            item.Encoding = Encoding.UTF8;
             HttpResult result = http.GetHtml(item);
             return result.Html;
         }

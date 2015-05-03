@@ -45,6 +45,7 @@
     <Compile Include="IRepository\IDtoRepository.cs" />
     <Compile Include="IRepository\IRoleRepository.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
+    <Compile Include="IService\IGetImgService.cs" />
     <Compile Include="Model\ChatMessage.cs" />
     <Compile Include="Model\Comic\Comic.cs" />
     <Compile Include="Model\Comic\ComicPage.cs" />
@@ -54,10 +55,9 @@
     <Compile Include="Model\Role\RolePower.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceManager.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IService\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
