@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Domain.Exception;
 
 namespace Domain.Model.Comic
 {
@@ -18,6 +19,30 @@ namespace Domain.Model.Comic
         public List<ComicPage> ComicPages()
         {
             return new List<ComicPage>();
+        }
+
+        public bool Add()
+        {
+            Check();
+
+            Comic.ComicRepository.AddComicVolume(this);
+
+            return true;
+        }
+
+        /// <summary>
+        /// 领域模型自检
+        /// </summary>
+        private void Check()
+        {
+            if (ComicId <= 0)
+            {
+                throw new JException("Comic.ComicId Error", ExceptionType.领域模型自检);
+            }
+            if (string.IsNullOrEmpty(VolumeName))
+            {
+                throw new JException("Comic.VolumeName Error", ExceptionType.领域模型自检);
+            }
         }
     }
 }

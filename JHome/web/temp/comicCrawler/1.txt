@@ -1,5 +1,5 @@
 //按下Ctrl-Q有内部函数提示 Console.Write 是输出结果到控制台的方法 CrawlerHelper是爬虫的帮助类 RegexHelper是正则帮助类 ParserHelper是剖析器帮助类
-var mainhtml = CrawlerHelper.CrawlOverToStr("http://manhua.dmzj.com/update_1.shtml");
+var mainhtml = CrawlerHelper.CrawlOverToStr("http://manhua.dmzj.com/update_2.shtml");
 
 var comicTitleXPath = '//div[@class="boxdiv1"]';
 var comicTitle_TitleXPath = '//a[@class="pictextst"]';
@@ -21,22 +21,20 @@ Helper.ForEach(comicTitleNodeList, function(obj){
         return false;
     }
     else{
-//         var temp = ParserHelper.GetXPathParserDoc(obj.OuterHtml).DocumentNode;
-//         var title = temp.SelectSingleNode(comicTitle_TitleXPath);
         var temp = ParserHelper.GetXPathParserNode(obj.InnerHtml);
         var title = temp.SelectSingleNode(comicTitle_TitleXPath).InnerHtml;
         var auth = temp.SelectSingleNode(comicTitle_AuthXPath).InnerHtml;
-        var type = temp.SelectSingleNode(comicTitle_TypeXPath).InnerHtml;
+        var type = temp.SelectSingleNode(comicTitle_TypeXPath).InnerHtml.replace("分类：", "");
         var ingUrl = temp.SelectSingleNode(comicTitle_ImgUrlXPath).GetAttributeValue("src", "");
+        var detailUrl = "http://manhua.dmzj.com/" + temp.SelectSingleNode(comicTitle_TitleXPath).GetAttributeValue("href", "");
         
-        var flat = ComicApp.AddComic(title, title, type, auth, title, ingUrl);
+        var flat = ComicApp.AddComic(title, title, type, auth, title, ingUrl, detailUrl, "dmzj");
         if(flat == true){
 //             ComicApp.DownLoadOverImage(title, "http://manhua.dmzj.com/update_1.shtml");
             Console.Write("漫画: " + title + " 添加成功" + auth);
         }
         else{
-            Console.Write("漫画: " + title + " 添加失败");
+            Console.Write("漫画: " + title + " 添加失败", 1);
         }
-//         Console.Write("漫画名:" + title.InnerHtml + " 作者:" + auth.InnerHtml + " 分类:" + type.InnerHtml + " 图片路径:" + ingUrl.GetAttributeValue("src", ""));
     }
 });

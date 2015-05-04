@@ -187,21 +187,11 @@ namespace JHelper.DB
 
         public static object InsertModel<T>(T model, string tableName)
         {
-            var ssc = SimpleSqlCreater.Insert(tableName);
-            PropertyInfo[] pis = typeof(T).GetProperties();
-            foreach (var propertyInfo in pis)
-            {
-                if (propertyInfo.CanWrite)
-                {
-                    if(propertyInfo.Name == "Id") continue;
-
-                    string propertyName = propertyInfo.Name;
-                    ssc.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null) + "'");
-                }
-            }
+            var ssc = SimpleSqlCreater.Insert(tableName)
+                .GetParamsFromClass(model);
             return ExecuteScalar(ssc.ToString());
         }
-        
+
         public static object InsertModel<T>(T model)
         {
             return InsertModel(model, GetTableFromClass<T>());

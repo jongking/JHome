@@ -8,7 +8,7 @@ namespace Application.IApplication
 {
     public interface IComicApplication
     {
-        bool AddComic(string name, string titlename, string type = "", string auth = "未知", string des = "", string orginCoverImg = "", int state = 0);
+        bool AddComic(string name, string titlename, string type = "", string auth = "未知", string des = "", string orginCoverImg = "", string detailUrl = "", string otherMessage = "", int state = 0);
         bool DownLoadOverImage(string comicname, string serImgpath, string currentPage = "", string host = "images.dmzj.com");
         List<ComicDto> GetAll();
         List<ComicVolumeDto> GetVolumeById(int comicid);

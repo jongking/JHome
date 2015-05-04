@@ -25,3 +25,4 @@ H:\GitHub\JHome\JHome\JHelper\bin\Debug\HtmlAgilityPack.dll
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\CsQuery.xml
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\HtmlAgilityPack.pdb
 H:\GitHub\JHome\JHome\JHelper\bin\Debug\HtmlAgilityPack.xml
+H:\GitHub\JHome\JHome\JHelper\obj\Debug\JHelper.csprojResolveAssemblyReference.cache

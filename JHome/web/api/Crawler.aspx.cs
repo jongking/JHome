@@ -89,9 +89,9 @@ public partial class api_Crawler : GloPage
         }
 
         public bool AddComic(string name, string titlename, string type = "", string auth = "未知", string des = "",
-            string orginCoverImg = "", int state = 0)
+            string orginCoverImg = "", string detailUrl = "", string otherMessage = "", int state = 0)
         {
-            return _comicApplication.AddComic(name, titlename, type, auth, des, orginCoverImg, state);
+            return _comicApplication.AddComic(name, titlename, type, auth, des, orginCoverImg, detailUrl, otherMessage,  state);
         }
 
         public bool DownLoadOverImage(string comicname, string currentPage = "", string host = "images.dmzj.com")

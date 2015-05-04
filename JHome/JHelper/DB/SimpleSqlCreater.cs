@@ -182,9 +182,38 @@ namespace JHelper.DB
             return this;
         }
 
+        public SimpleSqlCreater SetParam(string filedName, string param)
+        {
+            if (_kyDictionary.ContainsKey(filedName))
+            {
+                _kyDictionary[filedName] = param;
+            }
+            else
+            {
+                AddParam(filedName, param);
+            }
+            return this;
+        }
+
         public SimpleSqlCreater Combine(SimpleSqlCreater ssc)
         {
             _where += _linker + ssc;
+            return this;
+        }
+
+        public SimpleSqlCreater GetParamsFromClass<T>(T model)
+        {
+            PropertyInfo[] pis = typeof(T).GetProperties();
+            foreach (var propertyInfo in pis)
+            {
+                if (propertyInfo.CanWrite)
+                {
+                    if (propertyInfo.Name == "Id") continue;
+
+                    string propertyName = propertyInfo.Name;
+                    this.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null) + "'");
+                }
+            }
             return this;
         }
 

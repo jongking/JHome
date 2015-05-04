@@ -10,5 +10,7 @@ namespace Domain.IRepository
     {
         void Add(Comic comic);
         Comic GetByComicName(string comicName);
+        void AddComicVolume(ComicVolume comicVolume);
+        void AddComicPage(ComicPage comicPage);
     }
 }

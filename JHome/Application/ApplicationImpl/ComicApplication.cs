@@ -13,7 +13,7 @@ namespace Application.ApplicationImpl
 {
     public class ComicApplication : IComicApplication
     {
-        public bool AddComic(string name, string titlename, string type = "", string auth = "未知", string des = "", string orginCoverImg = "", int state = 0)
+        public bool AddComic(string name, string titlename, string type = "", string auth = "未知", string des = "", string orginCoverImg = "", string detailUrl = "", string otherMessage = "", int state = 0)
         {
             if (Comic.HasComic(name))
             {
@@ -29,6 +29,8 @@ namespace Application.ApplicationImpl
                 Description = des,
                 CoverImgPath = coverImg,
                 OrginCoverImgPath = orginCoverImg,
+                DetailUrl = detailUrl,
+                OtherMessage = otherMessage,
                 ComicState = state
             };
             return comic.Add();
@@ -54,6 +56,29 @@ namespace Application.ApplicationImpl
             CrawlerHelper.CrawlImage(comic.OrginCoverImgPath, serImgpath + comic.Id + "/" + comic.CoverImgPath, currentPage, host);
 
             return true;
+        }
+
+        public bool AddComicVolume(int comicid, string volumeName, int sortno)
+        {
+            var comicVolume = new ComicVolume()
+            {
+                ComicId = comicid,
+                VolumeName = volumeName,
+                SortNo = sortno,
+            };
+            return comicVolume.Add();
+        }
+
+        public bool AddComicPage(int comicid, int volumeId, string pageImgPath, int pageNumber)
+        {
+            var comicPage = new ComicPage()
+            {
+                ComicId = comicid,
+                VolumeId = volumeId,
+                PageImgPath = pageImgPath,
+                PageNumber = pageNumber,
+            };
+            return comicPage.Add();
         }
 
         public List<ComicDto> GetAll()

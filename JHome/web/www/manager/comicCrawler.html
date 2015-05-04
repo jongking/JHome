@@ -75,6 +75,8 @@
                     ConsoleHide();
                 }
             });
+            $("#IconClear").bind("click", function () { $("#ConsoleTextDiv").html(""); });
+            $("#IconClose").bind("click", ConsoleHide);
             BindKeyB();
         });
 
@@ -107,13 +109,13 @@
         }
 
         function ConsoleWrite(str) {
-            $("#ConsoleDiv").append("<span class='text-primary'>Console -> </span>" + str + "<br/>");
+            $("#ConsoleTextDiv").append("<span class='text-primary'>Console -> </span>" + str + "<br/>");
 
             ConsoleShow();
         }
 
         function Console(str) {
-            $("#ConsoleDiv").append(str);
+            $("#ConsoleTextDiv").append(str);
 
             ConsoleShow();
         }
@@ -141,7 +143,12 @@
     <div id="BodyDiv" class="Body">
         <textarea id="javascriptText" name="javascriptText" style="width: 100%; height: 100%;"></textarea>
     </div>
-    <div id="ConsoleDiv" class="panel-body" style="display: none; position: absolute; left: 0; bottom: 40px; width: 100%; top: 60%; z-index: 10; color: white; background: #000000; overflow: auto;">
+    <div id="ConsoleDiv" style="display: none; position: absolute; left: 0; bottom: 40px; width: 100%; top: 60%; z-index: 10; color: white; background: #000000;">
+        <div style="position: absolute; left: 0; top: 0; right: 0; height: 20px; padding-left: 15px; border-bottom: 1px solid #e0ffff;">
+            <span id="IconClear" class="glyphicon glyphicon-ban-circle"></span>
+            <span id="IconClose" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <div id="ConsoleTextDiv" style="position: absolute; left: 15px; top: 20px; bottom: 0; right: 0; overflow: auto;"></div>
     </div>
     <div style="position: absolute; left: 0; bottom: 0px; padding:0;" class="btn-group btn-group-justified">
         <div class="btn-group" role="group">

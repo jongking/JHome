@@ -20,6 +20,8 @@ namespace Domain.Model.Comic
         public string Description { get; set; }
         public string CoverImgPath { get; set; }
         public string OrginCoverImgPath { get; set; }
+        public string DetailUrl { get; set; }
+        public string OtherMessage { get; set; }
         public int ComicState { get; set; }
         public List<ComicVolume> ComicVolumes()
         {
