@@ -13,9 +13,14 @@ namespace Infrastructure.Repository
             DbHelper.InsertModel(obj);
         }
 
-        public virtual void Update(T obj)
+        public virtual int Update(T obj)
         {
-            DbHelper.UpdateModel(obj);
+            return DbHelper.UpdateModel(obj);
+        }
+
+        public int Update(T obj, params string[] updateParams)
+        {
+            return DbHelper.UpdateModelByParams(obj, updateParams);
         }
 
         public virtual void Remove(T obj)

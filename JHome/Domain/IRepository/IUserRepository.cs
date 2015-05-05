@@ -9,7 +9,7 @@ namespace Domain.IRepository
     public interface IUserRepository
     {
         void Add(User user);
-        void Update(User user);
+        int Update(User user);
         void Remove(User user);
         User GetById(int productId);
         User GetByUserName(string name);

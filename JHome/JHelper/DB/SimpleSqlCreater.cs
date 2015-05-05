@@ -100,47 +100,47 @@ namespace JHelper.DB
 
         public SimpleSqlCreater Eq(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} = {2}{1}{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} = {2}{1}{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater BigEq(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} >= {2}{1}{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} >= {2}{1}{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater SmlEq(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} <= {2}{1}{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} <= {2}{1}{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater Big(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} > {2}{1}{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} > {2}{1}{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater Sml(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} < {2}{1}{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} < {2}{1}{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater Like(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} LIKE {2}%{1}%{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} LIKE {2}%{1}%{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater NotLike(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} NOT LIKE {2}%{1}%{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} NOT LIKE {2}%{1}%{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater LLike(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} LIKE {2}%{1}{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} LIKE {2}%{1}{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater RLike(string filedName, string param, string separator = "'")
         {
-            _where += _linker + string.Format(" {0} LIKE {2}{1}%{2} ", filedName, param, separator);
+            _where += _linker + string.Format(" {0} LIKE {2}{1}%{2} ", filedName, param.Replace("'", "''"), separator);
             return this;
         }
         public SimpleSqlCreater In(string filedName, string param)
@@ -211,7 +211,7 @@ namespace JHelper.DB
                     if (propertyInfo.Name == "Id") continue;
 
                     string propertyName = propertyInfo.Name;
-                    this.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null) + "'");
+                    this.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null).ToString().Replace("'", "''") + "'");
                 }
             }
             return this;

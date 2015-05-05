@@ -203,24 +203,48 @@ namespace JHelper.DB
             PropertyInfo[] pis = typeof(T).GetProperties();
             foreach (var propertyInfo in pis)
             {
+                if (propertyInfo.Name == "Id")
+                {
+                    ssc.Eq("Id", propertyInfo.GetValue(model, null).ToString());
+                    continue;
+                }
+
                 if (propertyInfo.CanWrite)
                 {
-                    if (propertyInfo.Name == "Id")
-                    {
-                        ssc.Eq("Id", propertyInfo.GetValue(model, null).ToString());
-                        continue;
-                    }
-
                     string propertyName = propertyInfo.Name;
-                    ssc.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null) + "'");
+                    ssc.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null).ToString().Replace("'", "''") + "'");
                 }
             }
             return ExecuteNonQuery(ssc.ToString());
         }
-        
+        public static int UpdateModelByParams<T>(T model, string tableName, params string[] updateParams)
+        {
+            var ssc = SimpleSqlCreater.Update(tableName);
+            PropertyInfo[] pis = typeof(T).GetProperties();
+            foreach (var propertyInfo in pis)
+            {
+                if (propertyInfo.Name == "Id")
+                {
+                    ssc.Eq("Id", propertyInfo.GetValue(model, null).ToString());
+                    continue;
+                }
+
+                if (propertyInfo.CanWrite && updateParams.Contains(propertyInfo.Name))
+                {
+                    string propertyName = propertyInfo.Name;
+                    ssc.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null).ToString().Replace("'", "''") + "'");
+                }
+            }
+            return ExecuteNonQuery(ssc.ToString());
+        }
         public static int UpdateModel<T>(T model)
         {
             return UpdateModel(model, GetTableFromClass<T>());
+        }
+
+        public static int UpdateModelByParams<T>(T model, params string[] updateParams)
+        {
+            return UpdateModelByParams(model, GetTableFromClass<T>(), updateParams);
         }
 
         public static int UpdateModel<T>(T model, string tableName, string keyFieldName, string keyValue, string separator = "'")
@@ -234,7 +258,7 @@ namespace JHelper.DB
                     if (propertyInfo.Name == "Id") continue;
 
                     string propertyName = propertyInfo.Name;
-                    ssc.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null) + "'");
+                    ssc.AddParam(propertyName, "'" + propertyInfo.GetValue(model, null).ToString().Replace("'", "''") + "'");
                 }
             }
             ssc.Eq(keyFieldName, keyValue, separator);

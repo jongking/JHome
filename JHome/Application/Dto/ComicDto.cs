@@ -30,6 +30,11 @@ namespace Application.Dto
             return BaseDto.DtoRepository.GetModel<ComicDto>(SimpleSqlCreater.Select<ComicDto>().Eq("Id", id.ToString()).ToString());
         }
 
+        internal static ComicDto GetByName(string comicName)
+        {
+            return BaseDto.DtoRepository.GetModel<ComicDto>(SimpleSqlCreater.Select<ComicDto>().Eq("ComicName", comicName).ToString());
+        }
+
         internal static List<ComicVolumeDto> GetVolumeById(int id)
         {
             return BaseDto.DtoRepository.GetList<ComicVolumeDto>(SimpleSqlCreater.Select<ComicVolume>().Eq("ComicId", id.ToString()).ToString());

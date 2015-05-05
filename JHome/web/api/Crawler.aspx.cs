@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Application.Dto;
 using Application.IApplication;
 using Factory;
 using JHelper;
@@ -94,10 +95,33 @@ public partial class api_Crawler : GloPage
             return _comicApplication.AddComic(name, titlename, type, auth, des, orginCoverImg, detailUrl, otherMessage,  state);
         }
 
+        public bool AddComicVolume(int comicid, string volumeName, string volDetailUrl, int sortno)
+        {
+            return _comicApplication.AddComicVolume(comicid, volumeName, volDetailUrl, sortno);
+        }
+
+        public bool AddComicPage(int comicid, int volumeId, string pageImgPath, int pageNumber)
+        {
+            return _comicApplication.AddComicPage(comicid, volumeId, pageImgPath, pageNumber);
+        }
+
         public bool DownLoadOverImage(string comicname, string currentPage = "", string host = "images.dmzj.com")
         {
             var serImgpath = _server.MapPath(@"../resource/images/comic/");
             return _comicApplication.DownLoadOverImage(comicname, serImgpath, currentPage, host);
+        }
+        public int UpdateComic(int comicid, string titleName, string description)
+        {
+            return _comicApplication.UpdateComic(comicid, titleName, description);
+        }
+        public ComicDto GetByName(string comicname)
+        {
+            return _comicApplication.GetByName(comicname);
+        }
+
+        public int GetComicIdByName(string comicname)
+        {
+            return GetByName(comicname).Id;
         }
     }
     public static class Extensions

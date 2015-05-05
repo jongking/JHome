@@ -9,6 +9,8 @@ namespace Domain.IRepository
     public interface IComicRepository
     {
         void Add(Comic comic);
+        int Update(Comic comic);
+        int Update(Comic comic, params string[] updateParams);
         Comic GetByComicName(string comicName);
         void AddComicVolume(ComicVolume comicVolume);
         void AddComicPage(ComicPage comicPage);

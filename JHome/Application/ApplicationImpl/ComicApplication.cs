@@ -58,12 +58,24 @@ namespace Application.ApplicationImpl
             return true;
         }
 
-        public bool AddComicVolume(int comicid, string volumeName, int sortno)
+        public int UpdateComic(int comicid, string titleName, string description)
+        {
+            var comic = new Comic()
+            {
+                Id = comicid,
+                TitleName = titleName,
+                Description = description
+            };
+            return Comic.ComicRepository.Update(comic, "TitleName", "Description");
+        }
+
+        public bool AddComicVolume(int comicid, string volumeName, string volDetailUrl, int sortno)
         {
             var comicVolume = new ComicVolume()
             {
                 ComicId = comicid,
                 VolumeName = volumeName,
+                VolDetailUrl = volDetailUrl,
                 SortNo = sortno,
             };
             return comicVolume.Add();
@@ -99,6 +111,11 @@ namespace Application.ApplicationImpl
         public ComicDto GetById(int id)
         {
             return ComicDto.GetById(id);
+        }
+
+        public ComicDto GetByName(string comicName)
+        {
+            return ComicDto.GetByName(comicName);
         }
     }
 }

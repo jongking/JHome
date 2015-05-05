@@ -14,6 +14,7 @@ namespace Domain.Model.Comic
         /// </summary>
         public int ComicId { get; set; }
         public string VolumeName { get; set; }
+        public string VolDetailUrl { get; set; }
         public int SortNo { get; set; }
 
         public List<ComicPage> ComicPages()

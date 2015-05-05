@@ -1,11 +1,20 @@
 //按下Ctrl-Q有内部函数提示 Console.Write 是输出结果到控制台的方法 CrawlerHelper是爬虫的帮助类 RegexHelper是正则帮助类 ParserHelper是剖析器帮助类
-var mainhtml = CrawlerHelper.CrawlOverToStr("http://manhua.dmzj.com/update_2.shtml");
+var mainhtml = CrawlerHelper.CrawlOverToStr("http://manhua.dmzj.com/update_1.shtml");
 
+//漫画的主信息 http://manhua.dmzj.com/update_2.shtml
 var comicTitleXPath = '//div[@class="boxdiv1"]';
 var comicTitle_TitleXPath = '//a[@class="pictextst"]';
 var comicTitle_AuthXPath = '//span[@class="gray12"]';
 var comicTitle_TypeXPath = '//div[@class="pictext"]/ul[1]/li[3]';
 var comicTitle_ImgUrlXPath = '//img[1]';
+
+//漫画的卷数信息 http://manhua.dmzj.com/wangzhetianxia/
+var comicVolumeXPath = '//div[@class="cartoon_online_border"]/ul/li/a';
+
+//完整的漫画名称 http://manhua.dmzj.com/wangzhetianxia/
+var comicTitleNameXPath = '//span[@class="anim_title_text"]/a[1]/h1[1]';
+//漫画描述 http://manhua.dmzj.com/wangzhetianxia/
+var comicDescriptionXPath = '//div[@class="line_height_content"]';
 
 var xPathDoc = ParserHelper.GetXPathParserDoc(mainhtml);
 var rootNode = xPathDoc.DocumentNode;
@@ -26,12 +35,40 @@ Helper.ForEach(comicTitleNodeList, function(obj){
         var auth = temp.SelectSingleNode(comicTitle_AuthXPath).InnerHtml;
         var type = temp.SelectSingleNode(comicTitle_TypeXPath).InnerHtml.replace("分类：", "");
         var ingUrl = temp.SelectSingleNode(comicTitle_ImgUrlXPath).GetAttributeValue("src", "");
-        var detailUrl = "http://manhua.dmzj.com/" + temp.SelectSingleNode(comicTitle_TitleXPath).GetAttributeValue("href", "");
+        var detailUrl = temp.SelectSingleNode(comicTitle_TitleXPath).GetAttributeValue("href", "");
+        if(detailUrl.substring(0, 4) != "http"){
+            detailUrl = "http://manhua.dmzj.com/" + detailUrl;
+        }
         
         var flat = ComicApp.AddComic(title, title, type, auth, title, ingUrl, detailUrl, "dmzj");
         if(flat == true){
 //             ComicApp.DownLoadOverImage(title, "http://manhua.dmzj.com/update_1.shtml");
-            Console.Write("漫画: " + title + " 添加成功" + auth);
+            
+            //进入详细页
+            var detailHtml = CrawlerHelper.CrawlOverToStr(detailUrl);
+            var detailHtmlNode = ParserHelper.GetXPathParserNode(detailHtml);
+            var detailtitleName;
+            if(detailHtmlNode.SelectSingleNode(comicTitleNameXPath) != null){
+                //发生错误了,如果是国漫的话会跳到另外一个页面的。。。
+            	detailtitleName = detailHtmlNode.SelectSingleNode(comicTitleNameXPath).InnerHtml;
+            }
+            else{
+                Console.Write(detailUrl + "-------" + detailHtml, 1);
+            }
+//             var detaildescription = detailHtmlNode.SelectSingleNode(comicDescriptionXPath).InnerHtml;
+//             detaildescription.substring(0, detaildescription.lastIndexOf("<br>"))
+//             var comicId = ComicApp.GetComicIdByName(title);
+//             //更新漫画的完整漫画名和描述信息
+//             ComicApp.UpdateComic(comicId, detailtitleName, detaildescription)
+            
+//             var comicVolumeNodeList = detailHtmlNode.SelectNodes(comicVolumeXPath);
+//             Helper.ForEach(comicVolumeNodeList, function(volobj, volindex){
+//                 var volumeName = volobj.InnerHtml;
+//                 var volDetailUrl = "http://manhua.dmzj.com" + volobj.GetAttributeValue("href", "");
+                
+//                 ComicApp.AddComicVolume(comicId, volumeName, volDetailUrl, volindex);
+//             });
+            Console.Write("漫画: " + title + " 添加成功" + detailtitleName);
         }
         else{
             Console.Write("漫画: " + title + " 添加失败", 1);
